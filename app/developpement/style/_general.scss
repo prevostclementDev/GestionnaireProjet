@@ -1,0 +1,328 @@
+body {
+
+    font-family: sans-serif;
+    height: 100vh;
+    position: relative;
+    display: flex;
+
+    #header {
+
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        background-color: $colorP;
+        color: white;
+        padding: 15px 0 15px 15px;
+
+        .containsTitle {
+
+            margin-top: 10px;
+            padding-bottom: 15px;
+            padding-right: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid $colorTo;
+
+            h1 {
+
+                font-size: 18px;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+
+            }
+
+            h2 {
+
+                font-size: 16px;
+
+            }
+
+        }
+
+        #navigationHeader {
+
+            .listMenu {
+
+                li {
+
+                    display: flex;
+                    justify-content: flex-end;
+
+                    a {
+
+                        width: 90%;
+                        border-radius: 50px 0 0 50px;
+                        padding: 20px 20px 20px 30px;
+                        color: $colorP;
+                        text-decoration: none;
+                        color: white;
+                        font-size: 16px;
+                        transition: all 0.25s ease-in-out;
+
+                        &:hover {
+
+                            color: $colorP;
+                            background-color: white;
+
+                        }
+
+                        span {
+
+                            margin-left: 10px;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    #page-content {
+
+        width: calc(100% - 250px);
+        transform: translateX(250px);
+        padding: 10px;
+        position: relative;
+
+        #add_project {
+
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            padding: 18px;
+            border-radius: 50px;
+            background-color: $colorP;
+            color: white;
+            font-size: 18px;
+            z-index: 10;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            width: 50px;
+            height: 50px;
+            -webkit-transition: width 0.25s ease-in-out;
+            -moz-transition: width 0.25s ease-in-out;
+            -o-transition: width 0.25s ease-in-out;
+            transition: width 0.25s ease-in-out;
+
+            cursor: pointer;
+
+            span {
+
+                font-size: 16px;
+                margin-left: 10px;
+                width: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition-delay: 0.25s!important;
+                transition: width 0.25s, opacity 0.45s;
+
+            }
+
+            &:hover {
+
+                width: 180px;
+
+                span {
+
+                    width: auto;
+                    opacity: 1;
+
+                }
+
+            }
+
+
+        }
+
+        &.accueil {
+
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: "zone1 zone2"
+                                 "zone1 zone3";
+
+            .list-recentlyView {
+
+                grid-area: zone1;
+                border-right: 1px solid $colorP;
+                padding: 15px;
+                overflow: hidden;
+
+                & > h2 {
+
+                    color: $colorP;
+                    position: relative;
+                    padding-bottom: 15px;
+
+                    &::after {
+
+                        content: "";
+                        position: absolute;
+                        width: 10px;
+                        height: 10px;
+                        background-color: $colorP;
+                        border-radius: 50%;
+                        top: 50%;
+                        transform: translateY(-90%);
+                        margin-left: 15px;
+                    }
+
+                }
+
+                .container-list {
+
+                    padding: 20px 15px;
+                    height: 100%;
+                    overflow: auto;
+
+                    .projet {
+
+                        background-color: $colorTo;
+                        border-radius: 10px;
+                        padding: 15px 20px;
+                        color: $colorP;
+                        position: relative;
+                        margin: 30px 0;
+                        
+                        h2 {
+
+                            margin-bottom: 5px;
+
+                        }
+
+                        .projectPourcentView {
+
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+
+                            .pourcentBar {
+                                
+                                width: 80%;
+                                height: 5px;
+                                background-color: $colorT;
+                                border-radius: 15px;
+                                position: relative;
+
+                                span {
+
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    height: 100%;
+                                    background-color: $colorP;
+                                    border-radius: 15px;
+
+                                }
+
+                            }
+
+                            h4 {
+
+                                margin-left: 15px;
+
+                            }
+
+                        }
+
+                        h4 {
+
+                            margin-top: 10px;
+
+                        }
+
+                        a {
+
+                            position: absolute;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 0 0 10px 0;
+                            padding: 10px 15px;
+                            background-color: $colorP;
+                            color: white;
+                            text-decoration: none;
+                            cursor: pointer;
+                            transition: all ease-in-out 0.25s;
+
+                            &:hover {
+
+                                background-color: $colorTo;
+                                color: $colorP;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            .statistique {
+
+                grid-area: zone2;
+
+                .statList {
+
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-top: 50px;
+
+                    li {
+
+                        width: calc(100% / 4);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        margin: 0px 0 25px;
+
+                        .round-information {
+
+                            color: white;
+                            background-color: $colorP;
+                            width: 75px;
+                            height: 75px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+
+                            font-size: 24px;
+
+                            margin-bottom: 15px;
+
+                        }
+
+                        .information-about-round {
+
+                            color: $colorP;
+                            font-weight: 700;
+                            font-size: 14px;
+
+                        }
+
+                    }
+
+                }        
+
+            }
+
+        }
+
+
+
+    }
+
+}
