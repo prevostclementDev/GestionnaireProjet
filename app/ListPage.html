@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="production/style/style-min.css">
     <script src="https://kit.fontawesome.com/5c16673c29.js" crossorigin="anonymous"></script>
 
-    <title>Gestion projets</title>
+    <title>Template-list</title>
 </head>
     <body>
 
@@ -32,7 +32,7 @@
                         <i class="fa-solid fa-house"></i>
                         <span>Accueil</span>
                     </a></li>
-                    <li><a href="?page=recently">
+                    <li><a href="?page=recently" class="active">
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <span>Projet recent</span>
                     </a></li>
@@ -54,18 +54,144 @@
 
         </header>
 
-        <main id="page-content" class="view recently">
+        <main id="page-content" class="view-list recently">
 
-            <div id="add_project">
-                <i class="fa-solid fa-plus"></i>
-                <span>Ajouter un projet</span>
-            </div>
+            <section id="FilterBar">
+
+                <div class="containerItemsLeft">
+
+                    <label for="searchProject">
+                        <input type="text" name="searchProject" id="searchProject" placeholder="search by project name">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+
+                </div>
+
+            </section>
+
+            <section id="list-projet">
+
+                <section class="containList">
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                    <div class="projet">
+
+                        <h2>Gestionnaire de tâches</h2>
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
+                            <h4>16%</h4>
+                        </div>
+
+                        <h4> 6 tâches sur 23 réalisées </h4>
+                        <h4> Propriétaire : Clément Prévost </h4>
+
+                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+
+                    </div>
+
+                </section>
+
+            </section>
 
         </main>
 
-        <div id="containerPopUp">
+        <div id="add_project">
+            <i class="fa-solid fa-plus"></i>
+            <span>Ajouter un projet</span>
+        </div>
 
-            <div class="add_project_popUp" style="display: none;">
+        <div id="containerPopUp" style="display: none;">
+
+            <div class="add_project_popUp">
 
                 <div class="containsProjectAdd">
 

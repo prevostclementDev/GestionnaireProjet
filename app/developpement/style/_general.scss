@@ -1,7 +1,6 @@
 body {
 
     font-family: sans-serif;
-    height: 100vh;
     position: relative;
     display: flex;
 
@@ -67,6 +66,13 @@ body {
 
                         }
 
+                        &.active {
+
+                            color: $colorP;
+                            background-color: white;
+
+                        }
+
                         span {
 
                             margin-left: 10px;
@@ -89,59 +95,6 @@ body {
         transform: translateX(250px);
         padding: 10px;
         position: relative;
-
-        #add_project {
-
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            padding: 18px;
-            border-radius: 50px;
-            background-color: $colorP;
-            color: white;
-            font-size: 18px;
-            z-index: 10;
-
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            width: 50px;
-            height: 50px;
-            -webkit-transition: width 0.25s ease-in-out;
-            -moz-transition: width 0.25s ease-in-out;
-            -o-transition: width 0.25s ease-in-out;
-            transition: width 0.25s ease-in-out;
-
-            cursor: pointer;
-
-            span {
-
-                font-size: 16px;
-                margin-left: 10px;
-                width: 0;
-                overflow: hidden;
-                opacity: 0;
-                transition-delay: 0.25s!important;
-                transition: width 0.25s, opacity 0.45s;
-
-            }
-
-            &:hover {
-
-                width: 180px;
-
-                span {
-
-                    width: auto;
-                    opacity: 1;
-
-                }
-
-            }
-
-
-        }
 
         &.accueil {
 
@@ -184,86 +137,6 @@ body {
                     padding: 20px 15px;
                     height: 100%;
                     overflow: auto;
-
-                    .projet {
-
-                        background-color: $colorTo;
-                        border-radius: 10px;
-                        padding: 15px 20px;
-                        color: $colorP;
-                        position: relative;
-                        margin: 30px 0;
-                        
-                        h2 {
-
-                            margin-bottom: 5px;
-
-                        }
-
-                        .projectPourcentView {
-
-                            display: flex;
-                            justify-content: flex-start;
-                            align-items: center;
-
-                            .pourcentBar {
-                                
-                                width: 80%;
-                                height: 5px;
-                                background-color: $colorT;
-                                border-radius: 15px;
-                                position: relative;
-
-                                span {
-
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    height: 100%;
-                                    background-color: $colorP;
-                                    border-radius: 15px;
-
-                                }
-
-                            }
-
-                            h4 {
-
-                                margin-left: 15px;
-
-                            }
-
-                        }
-
-                        h4 {
-
-                            margin-top: 10px;
-
-                        }
-
-                        a {
-
-                            position: absolute;
-                            right: 0;
-                            bottom: 0;
-                            border-radius: 0 0 10px 0;
-                            padding: 10px 15px;
-                            background-color: $colorP;
-                            color: white;
-                            text-decoration: none;
-                            cursor: pointer;
-                            transition: all ease-in-out 0.25s;
-
-                            &:hover {
-
-                                background-color: $colorTo;
-                                color: $colorP;
-
-                            }
-
-                        }
-
-                    }
 
                 }
 
@@ -321,9 +194,101 @@ body {
 
         }
 
-        &.view {
+        &.view-list {
 
-            
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            grid-template-rows: 80px 1fr;
+            grid-template-areas: "zone1 zone1"
+                                 "zone2 zone3";
+            justify-items: center;
+            align-items: center;
+
+            #FilterBar {
+
+                grid-area: zone1;
+                width: calc(100% - 30px);
+                height: 98%;
+                border-radius: 10px;
+                background-color: white;
+                box-shadow:
+                0px 0.6px 5.3px rgba(0, 0, 0, 0.028),
+                0px 2px 17.9px rgba(0, 0, 0, 0.042),
+                0px 9px 80px rgba(0, 0, 0, 0.07)
+                ;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 10px 20px;
+
+                .containerItemsLeft {
+                    width: 50%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    label {
+
+                        width: 50%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        input {
+
+                            width: 50%;
+                            height: 40px;
+                            border: 1px solid $colorP;
+                            border-right: none;
+                            padding: 10px;
+                            outline: none;
+                            color: $colorP;
+
+                        }
+
+                        button {
+
+                            height: 40px;
+                            padding: 0 15px;
+                            background-color: $colorP;
+                            border-radius: 0 4px 4px 0;
+                            color: white;
+                            outline: none;
+                            border: 1px solid $colorP;
+                            cursor: pointer;
+                            transition: 0.25s ease-in-out all;
+
+                            &:hover {
+
+                                background-color: $colorTo;
+                                color: $colorP;
+                                border: 1px solid $colorTo;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            #list-projet {
+
+                grid-area: zone2;
+                width: 100%;
+                padding: 15px;
+                align-self: flex-start;
+                justify-self: center;
+
+                .containList {
+
+                    width: 100%;
+
+                }
+
+            }
 
         }
     }
@@ -465,6 +430,139 @@ body {
     
         }
     
+    }
+
+    #add_project {
+
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 18px;
+        border-radius: 50px;
+        background-color: $colorP;
+        color: white;
+        font-size: 18px;
+        z-index: 10;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        width: 50px;
+        height: 50px;
+        -webkit-transition: width 0.25s ease-in-out;
+        -moz-transition: width 0.25s ease-in-out;
+        -o-transition: width 0.25s ease-in-out;
+        transition: width 0.25s ease-in-out;
+
+        cursor: pointer;
+
+        span {
+
+            font-size: 16px;
+            margin-left: 10px;
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition-delay: 0.25s!important;
+            transition: width 0.25s, opacity 0.45s;
+
+        }
+
+        &:hover {
+
+            width: 180px;
+
+            span {
+
+                width: auto;
+                opacity: 1;
+
+            }
+
+        }
+
+
+    }
+
+    .projet {
+
+        background-color: $colorTo;
+        border-radius: 10px;
+        padding: 15px 20px;
+        color: $colorP;
+        position: relative;
+        margin: 30px 0;
+        
+        h2 {
+
+            margin-bottom: 5px;
+
+        }
+
+        .projectPourcentView {
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .pourcentBar {
+                
+                width: 80%;
+                height: 5px;
+                background-color: $colorT;
+                border-radius: 15px;
+                position: relative;
+
+                span {
+
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    background-color: $colorP;
+                    border-radius: 15px;
+
+                }
+
+            }
+
+            h4 {
+
+                margin-left: 15px;
+
+            }
+
+        }
+
+        h4 {
+
+            margin-top: 10px;
+
+        }
+
+        a {
+
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-radius: 0 0 10px 0;
+            padding: 10px 15px;
+            background-color: $colorP;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all ease-in-out 0.25s;
+
+            &:hover {
+
+                background-color: $colorTo;
+                color: $colorP;
+
+            }
+
+        }
+
     }
 
 }
