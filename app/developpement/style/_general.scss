@@ -103,6 +103,7 @@ body {
             grid-template-rows: 1fr 1fr;
             grid-template-areas: "zone1 zone2"
                                  "zone1 zone3";
+            height: 100vh;
 
             .list-recentlyView {
 
@@ -291,6 +292,87 @@ body {
             }
 
         }
+
+        &.searchPage {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+
+            #searchProjectPage {
+
+                width: 50%;
+
+                label {
+
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    input {
+
+                        width: 100%;
+                        height: 40px;
+                        border: 1px solid $colorP;
+                        border-right: none;
+                        padding: 10px;
+                        outline: none;
+                        color: $colorP;
+
+                    }
+
+                    button {
+
+                        height: 40px;
+                        padding: 0 15px;
+                        background-color: $colorP;
+                        border-radius: 0 4px 4px 0;
+                        color: white;
+                        outline: none;
+                        border: 1px solid $colorP;
+                        cursor: pointer;
+                        transition: 0.25s ease-in-out all;
+
+                        &:hover {
+
+                            background-color: $colorTo;
+                            color: $colorP;
+                            border: 1px solid $colorTo;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        &.projectPage {
+
+            display: grid;
+            height: 100vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1.5fr 1fr;
+            grid-template-areas: "zone1" "zone2";
+
+            .topViewProject{
+
+                grid-area: zone1;
+
+            }
+
+            .taskProject {
+
+                grid-area: zone2;
+
+            }
+
+        }
+
     }
 
     #containerPopUp {
