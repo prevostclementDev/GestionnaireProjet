@@ -1,0 +1,1 @@
+window.addEventListener("load",function(){let e=new XMLHttpRequest;const n=document.querySelector("#header"),t=document.querySelector("#page-content");e.open("GET","../app/fonction/traitement/traitementPage.php",!0),e.onreadystatechange=function(){4===e.readyState&&(response=JSON.parse(e.response),n.innerHTML=response[0],t.innerHTML=response[1])},e.send()});
