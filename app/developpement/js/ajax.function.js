@@ -3,6 +3,7 @@ window.addEventListener('load',function(){
     const header = document.querySelector('#header');
     const pageContent = document.querySelector('#page-content');
 
+    /* INIT FIRST VIEW */
     if ( window.location == window.location.origin + "/__code/GestionnaireProjet/app/index.php" ||
         window.location == window.location.origin + "/__code/GestionnaireProjet/app/"
     ) {
@@ -19,6 +20,8 @@ window.addEventListener('load',function(){
     
             })
     
+            document.querySelector('[attr_class=accueil]').classList.add("active")
+
             pageContent.classList.add('accueil')
     
             pageContent.innerHTML = response[1]
@@ -33,6 +36,7 @@ window.addEventListener('load',function(){
 
     }
 
+    /* RETURN BACK OR FRONT */
     window.onpopstate = (event) => {
 
         if (event.state == null) {
@@ -46,6 +50,10 @@ window.addEventListener('load',function(){
                     pageContent.classList.remove(elementClass);
         
                 })
+
+                document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
+
+                document.querySelector('[attr_class=accueil]').classList.add("active")
         
                 pageContent.classList.add('accueil')
         
@@ -63,11 +71,13 @@ window.addEventListener('load',function(){
             
                 })
 
+                const regex = /(list\.php\?type\=)[a-zA-Z]{1,}/g;
+
                 if ( event.state.direction == "accueil.php" ) {
 
                     classPage = "accueil"
 
-                } else if ( event.state.direction == "list.php" ) {
+                } else if ( event.state.direction.search(regex) != -1 ) {
 
                     classPage = "view-list"
 
@@ -75,6 +85,10 @@ window.addEventListener('load',function(){
 
                     classPage = "searchPage"
                 }
+
+                document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
+
+                document.querySelector('[attr_class='+classPage+']').classList.add("active")
             
                 pageContent.classList.add(classPage);
                 
@@ -140,6 +154,10 @@ function RebootEventLink(containerContent) {
                     containerContent.classList.remove(elementClass);
 
                 })
+
+                document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
+
+                el.classList.add('active')
 
                 containerContent.classList.add(el.getAttribute('attr_class'));
                 

@@ -2,46 +2,80 @@
 
     class generate_page {
 
-        public static function generateHeader() {
-            return '
-                <div class="topVisibleHeader">
+        public static function generateHeader(string $active = "") {
 
-                    <div class="containsTitle">
+            $links = array(
+                array(
+                    'href' => "accueil.php",
+                    'text' => "Accueil",
+                    'class' => "accueil",
+                    "icone" => '<i class="fa-solid fa-house"></i>'
+                ),
+                array(
+                    'href' => "list.php?type=recently",
+                    'text' => "Projet recent",
+                    'class' => "view-list",
+                    "icone" => '<i class="fa-solid fa-clock-rotate-left"></i>'
+                ),
+                array(
+                    'href' => "list.php?type=now",
+                    'text' => "Projet en cours",
+                    'class' => "view-list",
+                    "icone" => '<i class="fa-solid fa-clock"></i>'
+                ),
+                array(
+                    'href' => "list.php?type=finish",
+                    'text' => "Projet fini",
+                    'class' => "view-list",
+                    "icone" => '<i class="fa-solid fa-calendar-check"></i>'
+                ),
+                array(
+                    'href' => "search.php",
+                    'text' => "Recherche",
+                    'class' => "searchPage",
+                    "icone" => '<i class="fa-solid fa-magnifying-glass"></i>'
+                ),
+            );
 
-                        <h1>Gestionnaire de projet</h1>
-                        <h2>22 Juillet 2022</h2>
+            $header = '
+            <div class="topVisibleHeader">
 
-                    </div>
+                <div class="containsTitle">
+
+                    <h1>Gestionnaire de projet</h1>
+                    <h2>22 Juillet 2022</h2>
 
                 </div>
 
-                <nav id="navigationHeader">
+            </div>
 
-                    <ul class="listMenu">
-                        <li><a class="Hlink" href="accueil.php" class="active" attr_class="accueil">
-                            <i class="fa-solid fa-house"></i>
-                            <span>Accueil</span>
-                        </a></li>
-                        <li><a class="Hlink" href="list.php" attr_class="view-list">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
-                            <span>Projet recent</span>
-                        </a></li>
-                        <li><a class="Hlink" href="list.php" attr_class="view-list">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>Projet en cours</span>
-                        </a></li>
-                        <li><a class="Hlink" href="list.php" attr_class="view-list">
-                            <i class="fa-solid fa-calendar-check"></i>
-                            <span>Projet fini</span>
-                        </a></li>
-                        <li><a class="Hlink" href="search.php" attr_class="searchPage">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <span>Recherche</span>
-                        </a></li>
-                    </ul>
+            <nav id="navigationHeader">
 
-                </nav>
+                <ul class="listMenu">
             ';
+
+            foreach ( $links as $link ) {
+
+                $class = "";
+
+                if ( $active == $link["href"] ) {
+
+                    $class = "active";
+
+                }
+
+                $header .= '
+                <li><a class="Hlink '.$class.'" href="'.$link["href"].'" attr_class="'.$link["class"].'">
+                '.$link["icone"].'
+                <span>'.$link["text"].'</span>
+                </a></li>
+                ';
+
+            }
+
+            $header .= '</ul></nav>';
+
+            return $header;
 
         }
 

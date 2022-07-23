@@ -30,7 +30,7 @@
 
                     <header id="header">
 
-                        <?= generate_page::generateHeader() ?>
+                        <?= generate_page::generateHeader("search.php") ?>
 
                     </header>
 

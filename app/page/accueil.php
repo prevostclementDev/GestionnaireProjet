@@ -23,7 +23,6 @@
 
         }
 
-
     } else {
 
         ?>
@@ -44,7 +43,7 @@
 
                     <header id="header">
 
-                        <?= generate_page::generateHeader() ?>
+                        <?= generate_page::generateHeader("accueil.php") ?>
 
                     </header>
 

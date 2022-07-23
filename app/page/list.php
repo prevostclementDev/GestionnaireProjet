@@ -12,6 +12,8 @@ if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
 } else {
 
+    $pageType = $_GET['type']
+
     ?>
     
     <!DOCTYPE html>
@@ -30,7 +32,7 @@ if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
                 <header id="header">
 
-                      <?= generate_page::generateHeader()  ?>
+                      <?= generate_page::generateHeader("list.php?type=".$pageType)  ?>
 
                 </header>
 
