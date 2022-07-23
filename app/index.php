@@ -15,7 +15,7 @@
         <header id="header">
         </header>
 
-        <main id="page-content" class="accueil">   
+        <main id="page-content">   
         </main>
 
         <div id="add_project">
@@ -77,8 +77,8 @@
 
         </div>
         
+        <script src="production/js/ajax.function-min.js"></script>
         <script src="production/js/main-min.js"></script>
         <script src="production/js/actionOpenMenu-min.js"></script>
-        <script src="production/js/ajax.function-min.js"></script>
     </body>
 </html>
