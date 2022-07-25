@@ -1,3 +1,3 @@
 <?php
 
-    define("baseUrl", '<base href="/__code/GestionnaireProjet/app/">');
+    define("baseUrl", '<base href="/__site/__fromscratch/GestionnaireProjet/app/">');

@@ -5,19 +5,20 @@ window.addEventListener('load',function(){
     /* ############################# */
     const header = document.querySelector('#header');
     const pageContent = document.querySelector('#page-content');
+    const baseUrl = "/__site/__fromscratch/GestionnaireProjet/app/"
 
     /* ##################### */
     /* FIRST LOAD INTEGORATE */
     /* ##################### */
-    if ( window.location == window.location.origin + "/__code/GestionnaireProjet/app/accueil" ||
-        window.location == window.location.origin + "/__code/GestionnaireProjet/app/" ||
-        window.location == window.location.origin + "/__code/GestionnaireProjet/app/index.php"
+    if ( window.location == window.location.origin + baseUrl + "accueil" ||
+        window.location == window.location.origin + baseUrl ||
+        window.location == window.location.origin + baseUrl + "index.php"
     ) {
 
         /* ########## */
         /* CHANGE URL */
         /* ########## */
-        window.history.pushState({direction : "accueil"}, "accueil", window.location.origin + "/__code/GestionnaireProjet/app/accueil");
+        window.history.pushState({direction : "accueil"}, "accueil", window.location.origin + baseUrl + "accueil");
 
         /* ######### */
         /* AJAX CALL */
@@ -207,7 +208,7 @@ function RebootEventLink(containerContent) {
                 
                 containerContent.innerHTML = response
 
-                window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + "/__code/GestionnaireProjet/app/" + newpage);
+                window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
 
             })
 
