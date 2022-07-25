@@ -1,16 +1,28 @@
 window.addEventListener('load',function(){
 
+    /* ############################# */
+    /*       CONST DECLARATION       */
+    /* ############################# */
     const header = document.querySelector('#header');
     const pageContent = document.querySelector('#page-content');
 
-    /* INIT FIRST VIEW */
-    if ( window.location == window.location.origin + "/__code/GestionnaireProjet/app/index.php" ||
-        window.location == window.location.origin + "/__code/GestionnaireProjet/app/"
+    /* ##################### */
+    /* FIRST LOAD INTEGORATE */
+    /* ##################### */
+    if ( window.location == window.location.origin + "/__code/GestionnaireProjet/app/accueil" ||
+        window.location == window.location.origin + "/__code/GestionnaireProjet/app/" ||
+        window.location == window.location.origin + "/__code/GestionnaireProjet/app/index.php"
     ) {
 
-        window.history.pushState({direction : "accueil.php"}, "accueil", window.location.origin + "/__code/GestionnaireProjet/app/page/accueil.php");
+        /* ########## */
+        /* CHANGE URL */
+        /* ########## */
+        window.history.pushState({direction : "accueil"}, "accueil", window.location.origin + "/__code/GestionnaireProjet/app/accueil");
 
-        requestPage("../page/accueil.php?getHeader=true", (response) => {
+        /* ######### */
+        /* AJAX CALL */
+        /* ######### */
+        requestPage("../app/page/accueil.php?getHeader=true", (response) => {
 
             header.innerHTML = response[0]
     
@@ -32,16 +44,21 @@ window.addEventListener('load',function(){
 
     } else {
 
+        /* ######################### */
+        /* ADD EVENT ON LINK IN MENU */
+        /* ######################### */
         RebootEventLink(pageContent)
 
     }
 
+    /* #################### */
     /* RETURN BACK OR FRONT */
+    /* #################### */
     window.onpopstate = (event) => {
 
         if (event.state == null) {
 
-            requestPage("../page/accueil.php", (response) => {
+            requestPage("../app/page/accueil.php?getHeader=true", (response) => {
 
                 header.innerHTML = response[0]
         
@@ -51,7 +68,7 @@ window.addEventListener('load',function(){
         
                 })
 
-                document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
+                /* document.querySelector("#navigationHeader .Hlink.active").classList.remove("active") */
 
                 document.querySelector('[attr_class=accueil]').classList.add("active")
         
@@ -63,7 +80,31 @@ window.addEventListener('load',function(){
 
         } else {
 
-            requestPage("../page/"+event.state.direction, (response) => {
+            const regex = /projets-([a-zA-Z]+)/g;
+
+            if ( event.state.direction == "accueil" ) {
+
+                classPage = "accueil"
+                type = "noneA"
+
+                ajaxCall = classPage + ".php"
+
+            } else if ( event.state.direction.search(regex) != -1 ) {
+
+                classPage = "view-list"
+                type = event.state.direction.split('-')[1]
+
+                ajaxCall = "list?type="+type
+
+            } else if ( event.state.direction == "search") {
+
+                classPage = "searchPage"
+                type = "noneS"
+
+                ajaxCall = "search.php"
+            }
+
+            requestPage("../app/page/"+ajaxCall, (response) => {
 
                 pageContent.classList.forEach(elementClass => {
             
@@ -71,24 +112,9 @@ window.addEventListener('load',function(){
             
                 })
 
-                const regex = /(list\.php\?type\=)[a-zA-Z]{1,}/g;
-
-                if ( event.state.direction == "accueil.php" ) {
-
-                    classPage = "accueil"
-
-                } else if ( event.state.direction.search(regex) != -1 ) {
-
-                    classPage = "view-list"
-
-                } else if ( event.state.direction == "search.php") {
-
-                    classPage = "searchPage"
-                }
-
                 document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
 
-                document.querySelector('[attr_class='+classPage+']').classList.add("active")
+                document.querySelector('[attr_type='+type+']').classList.add("active")
             
                 pageContent.classList.add(classPage);
                 
@@ -102,6 +128,9 @@ window.addEventListener('load',function(){
 
 })
 
+/* ################## */
+/* AJAX CALL FUNCTION */
+/* ################## */
 function requestPage(uri,callback) {
 
     let xhr = new XMLHttpRequest();
@@ -135,6 +164,9 @@ function requestPage(uri,callback) {
 
 }
 
+/* ######################### */
+/* ADD EVENT ON LINK IN MENU */
+/* ######################### */
 function RebootEventLink(containerContent) {
 
     const AllLinkHeader = document.querySelectorAll("#navigationHeader .Hlink");
@@ -147,7 +179,19 @@ function RebootEventLink(containerContent) {
 
             newpage = el.getAttribute("href")
 
-            requestPage("../page/"+newpage, (response) => {
+            if( newpage.includes("-") ) {
+
+                linkExplode = newpage.split('-');
+
+                newLink = "list.php?type=" + linkExplode[1]
+
+            } else {
+
+                newLink = newpage + ".php"
+
+            }
+
+            requestPage("../app/page/"+newLink, (response) => {
 
                 containerContent.classList.forEach(elementClass => {
 
@@ -163,7 +207,7 @@ function RebootEventLink(containerContent) {
                 
                 containerContent.innerHTML = response
 
-                window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + "/__code/GestionnaireProjet/app/page/" + newpage);
+                window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + "/__code/GestionnaireProjet/app/" + newpage);
 
             })
 

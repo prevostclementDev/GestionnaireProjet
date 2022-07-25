@@ -1,3 +1,9 @@
+<?php
+
+    @require_once "config.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,10 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="production/style/style-min.css">
+    <?= baseUrl ?>
+    <link rel="stylesheet" href="assets/production/style/style-min.css">
     <script src="https://kit.fontawesome.com/5c16673c29.js" crossorigin="anonymous"></script>
 
-    <title>template-index</title>
+    <title>Gestionnaire projets | accueil</title>
 </head>
     <body>
 
@@ -77,8 +84,8 @@
 
         </div>
         
-        <script src="production/js/ajax.function-min.js"></script>
-        <script src="production/js/main-min.js"></script>
-        <script src="production/js/actionOpenMenu-min.js"></script>
+        <script src="assets/production/js/ajax.function-min.js"></script>
+        <script src="assets/production/js/main-min.js"></script>
+        <script src="assets/production/js/actionOpenMenu-min.js"></script>
     </body>
 </html>

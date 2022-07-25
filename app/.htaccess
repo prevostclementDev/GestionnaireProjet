@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^([a-zA-Z]+)$ page/$1.php [L]
+RewriteRule ^projets-([a-zA-Z]+)$ page/list?type=$1 [L]

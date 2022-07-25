@@ -2,38 +2,62 @@
 
     class generate_page {
 
+        public static function get_head($base,$title) {
+
+            return '<!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                '.$base.'
+                <link rel="stylesheet" href="assets/production/style/style-min.css">
+                <script src="https://kit.fontawesome.com/5c16673c29.js" crossorigin="anonymous"></script>
+
+                <title>'.$title.'</title>
+            </head>
+                <body>';
+
+        }
+
         public static function generateHeader(string $active = "") {
 
             $links = array(
                 array(
-                    'href' => "accueil.php",
+                    'href' => "accueil",
                     'text' => "Accueil",
                     'class' => "accueil",
-                    "icone" => '<i class="fa-solid fa-house"></i>'
+                    "icone" => '<i class="fa-solid fa-house"></i>',
+                    "type" => 'noneA'
                 ),
                 array(
-                    'href' => "list.php?type=recently",
+                    'href' => "projets-recently",
                     'text' => "Projet recent",
                     'class' => "view-list",
-                    "icone" => '<i class="fa-solid fa-clock-rotate-left"></i>'
+                    "icone" => '<i class="fa-solid fa-clock-rotate-left"></i>',
+                    "type" => 'recently'
                 ),
                 array(
-                    'href' => "list.php?type=now",
+                    'href' => "projets-now",
                     'text' => "Projet en cours",
                     'class' => "view-list",
-                    "icone" => '<i class="fa-solid fa-clock"></i>'
+                    "icone" => '<i class="fa-solid fa-clock"></i>',
+                    "type" => 'now'
                 ),
                 array(
-                    'href' => "list.php?type=finish",
+                    'href' => "projets-finish",
                     'text' => "Projet fini",
                     'class' => "view-list",
-                    "icone" => '<i class="fa-solid fa-calendar-check"></i>'
+                    "icone" => '<i class="fa-solid fa-calendar-check"></i>',
+                    "type" => 'finish'
                 ),
                 array(
-                    'href' => "search.php",
+                    'href' => "search",
                     'text' => "Recherche",
                     'class' => "searchPage",
-                    "icone" => '<i class="fa-solid fa-magnifying-glass"></i>'
+                    "icone" => '<i class="fa-solid fa-magnifying-glass"></i>',
+                    "type" => 'noneS'
                 ),
             );
 
@@ -65,7 +89,7 @@
                 }
 
                 $header .= '
-                <li><a class="Hlink '.$class.'" href="'.$link["href"].'" attr_class="'.$link["class"].'">
+                <li><a class="Hlink '.$class.'" href="'.$link["href"].'" attr_type="'.$link["type"].'" attr_class="'.$link["class"].'">
                 '.$link["icone"].'
                 <span>'.$link["text"].'</span>
                 </a></li>

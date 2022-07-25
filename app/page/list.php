@@ -1,6 +1,7 @@
 <?php
 
-@include "../fonction/class.projet.php";
+@require_once "../config.php";
+@require_once "../fonction/class.projet.php";
 
 if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
@@ -16,23 +17,11 @@ if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
     ?>
     
-    <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-            <link rel="stylesheet" href="../production/style/style-min.css">
-            <script src="https://kit.fontawesome.com/5c16673c29.js" crossorigin="anonymous"></script>
-
-            <title>template-index</title>
-        </head>
-            <body>
+    <?= generate_page::get_head(baseUrl,"Gestionnaire projets | list projets") ?>
 
                 <header id="header">
 
-                      <?= generate_page::generateHeader("list.php?type=".$pageType)  ?>
+                      <?= generate_page::generateHeader("projets-".$pageType)  ?>
 
                 </header>
 
@@ -101,9 +90,9 @@ if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
                 </div>
                 
-                <script src="../production/js/main-min.js"></script>
-                <script src="../production/js/actionOpenMenu-min.js"></script>
-                <script src="../production/js/ajax.function-min.js"></script>
+                <script src="assets/production/js/main-min.js"></script>
+                <script src="assets/production/js/actionOpenMenu-min.js"></script>
+                <script src="assets/production/js/ajax.function-min.js"></script>
             </body>
         </html>
 
