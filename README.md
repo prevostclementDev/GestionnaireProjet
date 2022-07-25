@@ -1,3 +1,3 @@
 # gestionnaireProjet
-## In developpement
-### Unusable version
+--------------------------------------
+## In developpement - Unusable version
