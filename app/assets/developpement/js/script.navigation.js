@@ -1,3 +1,5 @@
+const baseUrl = "/__site/__fromscratch/GestionnaireProjet/app/"
+
 window.addEventListener('load',function(){
 
     /* ############################# */
@@ -5,7 +7,6 @@ window.addEventListener('load',function(){
     /* ############################# */
     const header = document.querySelector('#header');
     const pageContent = document.querySelector('#page-content');
-    const baseUrl = "/__site/__fromscratch/GestionnaireProjet/app/"
 
     /* ##################### */
     /* FIRST LOAD INTEGORATE */
@@ -90,6 +91,8 @@ window.addEventListener('load',function(){
 
                 ajaxCall = classPage + ".php"
 
+                document.title = "Gestionnaire projets | accueil"
+
             } else if ( event.state.direction.search(regex) != -1 ) {
 
                 classPage = "view-list"
@@ -97,12 +100,16 @@ window.addEventListener('load',function(){
 
                 ajaxCall = "list?type="+type
 
+                document.title = "Gestionnaire projets | projets"
+
             } else if ( event.state.direction == "search") {
 
                 classPage = "searchPage"
                 type = "noneS"
 
                 ajaxCall = "search.php"
+
+                document.title = "Gestionnaire projets | search"
             }
 
             requestPage("../app/page/"+ajaxCall, (response) => {
@@ -128,6 +135,9 @@ window.addEventListener('load',function(){
     }
 
 })
+
+
+
 
 /* ################## */
 /* AJAX CALL FUNCTION */
@@ -186,9 +196,13 @@ function RebootEventLink(containerContent) {
 
                 newLink = "list.php?type=" + linkExplode[1]
 
+                document.title = "Gestionnaire projets | "+ linkExplode[0]
+
             } else {
 
                 newLink = newpage + ".php"
+
+                document.title = "Gestionnaire projets | "+newpage
 
             }
 

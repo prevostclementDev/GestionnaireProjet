@@ -1,7 +1,7 @@
 <?php
 
     @require_once "../config.php";
-    @require_once "../fonction/class.projet.php";
+    @require_once "../fonction/class.generate.php";
 
     if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']))  {
 

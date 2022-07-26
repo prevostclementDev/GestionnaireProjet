@@ -74,7 +74,7 @@
                             <input type="text" name="projectOwner" id="projectOwner" placeholder="Maxime beaujardin">
                         </label>
                         
-                        <input type="submit" value="Ajouter un projet">
+                        <input type="submit" id="submitProject" value="Ajouter un projet">
     
                     </div>
     
@@ -84,7 +84,7 @@
 
         </div>
         
-        <script src="assets/production/js/ajax.function-min.js"></script>
+        <script src="assets/production/js/script.navigation-min.js"></script>
         <script src="assets/production/js/main-min.js"></script>
         <script src="assets/production/js/actionOpenMenu-min.js"></script>
     </body>
