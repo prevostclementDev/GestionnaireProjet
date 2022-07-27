@@ -75,6 +75,10 @@
                                         </label>
                                         
                                         <input type="submit" id="submitProject" value="Ajouter un projet">
+
+                                        <div id="response">
+                            
+                                        </div>
                     
                                     </div>
                     
@@ -84,9 +88,10 @@
 
                         </div>
                         
-                        <script src="assets/production/js/main-min.js"></script>
+                        
                         <script src="assets/production/js/actionOpenMenu-min.js"></script>
                         <script src="assets/production/js/script.navigation-min.js"></script>
+                        <script src="assets/production/js/main-min.js"></script>
                     </body>
                 </html>
 

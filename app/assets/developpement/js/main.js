@@ -18,19 +18,34 @@ window.addEventListener('DOMContentLoaded' , () => {
                 projectOwner : document.querySelector('#form-addProject #projectOwner'),
             }
             
-            if ( error = checkValidate(projectValue) ) {
-
-                let data = []
+            
+            if ( checkValidate(projectValue) == true ) {
                     
-                ajax_action("../app/fonction/ajax.action.reception.php",projectValue, (sendBack) => {
+                ajax_action("../app/fonction/ajax.action.reception.php",projectValue,"addproject", (sendBack) => {
 
-                    console.log(sendBack)
+                    if ( sendBack[0] ) {
+
+                        changeReturnValue_project('Projet ajouté',"valide")
+
+                    } else {
+
+                        if ( sendBack[2][1] == 1062 ) {
+
+                            changeReturnValue_project('nom de projet déjà existant',"error")
+
+                        } else {
+
+                            changeReturnValue_project('erreur, veuillez contacter un administrateur',"error")
+
+                        }
+
+                    }
 
                 })
 
             } else {
 
-                
+                error = checkValidate(projectValue) // TODO AJOUTER MESSAGE D'ERREUR
 
             }
 
@@ -82,17 +97,17 @@ function checkValidate(listValue) {
 
 }
 
-function ajax_action(url,postValue,callback) {
+function ajax_action(url,postValue,typeAction,callback) {
 
     let xhr = new XMLHttpRequest();
-    xhr.open("GET",url,true);
+    xhr.open("POST",url,true);
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4){
 
             if (xhr.status === 200) {
 
-                callback(xhr.response)
+                callback(JSON.parse(xhr.response))
 
                 return true;
 
@@ -105,8 +120,16 @@ function ajax_action(url,postValue,callback) {
         }
     }
 
-    xhr.setRequestHeader('ajaxAddProject', 'true')
+    xhr.setRequestHeader("ajaxAction",typeAction)
 
-    xhr.send();
+    const BODY = new FormData()
+
+    for ( index in postValue ) {
+
+        BODY.append(index,postValue[index].value)
+
+    }
+    
+    xhr.send(BODY);
 
 }

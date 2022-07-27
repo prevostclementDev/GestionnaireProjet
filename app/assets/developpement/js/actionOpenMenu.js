@@ -37,3 +37,24 @@ if ( btn_popUp_Projet != undefined ) {
     })
 
 }
+
+function changeReturnValue_project(newValue,type) {
+
+    const valueReturn = document.querySelector('#containerPopUp .add_project_popUp #response');
+
+    if ( type == "error" ) {
+
+        valueReturn.classList.add('error')
+        valueReturn.classList.remove('valide')
+
+    } else if ( type == "valide" ) {
+
+        valueReturn.classList.remove('error')
+        valueReturn.classList.add('valide')
+
+    }
+
+    valueReturn.innerHTML = newValue;
+
+}
+

@@ -844,6 +844,31 @@ body {
 
                     }
 
+                    #response {
+
+                        border: 1px solid $colorP;
+                        color: $colorP;
+                        padding: 10px;
+                        margin-top: 10px;
+                        width: 100%;
+                        display: none;
+
+                        &.error {
+
+                            color: red;
+                            border-color: red;
+                            display: initial;
+
+                        }
+
+                        &.valide {
+
+                            display: initial;
+
+                        }
+
+                    }
+
                 }
 
             }
