@@ -18,6 +18,11 @@ window.addEventListener('DOMContentLoaded' , () => {
                 projectOwner : document.querySelector('#form-addProject #projectOwner'),
             }
             
+            for (let i in projectValue) {
+                
+                projectValue[i].style.borderColor = "#16302b"
+
+            }
             
             if ( checkValidate(projectValue) == true ) {
                     
@@ -32,6 +37,7 @@ window.addEventListener('DOMContentLoaded' , () => {
                         if ( sendBack[2][1] == 1062 ) {
 
                             changeReturnValue_project('nom de projet déjà existant',"error")
+                            projectValue['name'].style.borderColor = "red"
 
                         } else {
 
@@ -45,12 +51,21 @@ window.addEventListener('DOMContentLoaded' , () => {
 
             } else {
 
-                error = checkValidate(projectValue) // TODO AJOUTER MESSAGE D'ERREUR
+                error = checkValidate(projectValue)
+                messageError = ""
+
+                error.forEach( element => {
+
+                    element[0].style.borderColor = "red"
+                    messageError += element[1] + " | "
+
+                })
+
+                changeReturnValue_project(messageError,"error")
 
             }
 
         }
-
     }
 
 })
@@ -63,25 +78,38 @@ function checkValidate(listValue) {
 
     if ( listValue.name.value.length > 255 || listValue.name.value == "" ) {
 
-        returnError.push(listValue.name)
+        returnError.push([listValue.name,"valeur du nom incorrect"])
 
     }
 
     if(!listValue.startDate.value.match(regexDate)) {
 
-        returnError.push(listValue.startDate)
+        returnError.push([listValue.startDate,'date de début non valide'])
 
-    }
+    } else {
 
-    if ( listValue.endDate.value != "" && !listValue.endDate.value.match(regexDate) ) {
+        if ( listValue.endDate.value != "" && !listValue.endDate.value.match(regexDate) ) {
 
-        returnError.push(listValue.endDate)
+            returnError.push([listValue.endDate,"date de fin non valide"])
+    
+        } else {
+
+            const start = new Date(listValue.startDate.value)
+            const end = new Date(listValue.endDate.value)
+
+            if ( start.getTime() > end.getTime() ) {
+
+                returnError.push([listValue.endDate,"date de fin avant date de début"])
+
+            }
+
+        }
 
     }
 
     if ( listValue.projectOwner.value == "" ) {
 
-        returnError.push(listValue.projectOwner)
+        returnError.push([listValue.projectOwner,"propriétaire requis"])
 
     }
 

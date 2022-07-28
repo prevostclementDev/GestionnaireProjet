@@ -61,7 +61,7 @@
                     
                                         <label for="categorie">
                                             <span>catégorie(s) :</span>
-                                            <input type="text" name="categorie" id="categorie" placeholder="Développement web - Marketing - HTML - CSS">
+                                            <input type="text" name="categorie" id="categorie" placeholder="Développement web/Marketing/HTML/CSS/">
                                         </label>
                                         
                                         <label for="projectDesc">
