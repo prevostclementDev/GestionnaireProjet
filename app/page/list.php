@@ -1,38 +1,74 @@
 <?php
 
-@require_once "../config.php";
-@require_once "../fonction/class.generate.php";
+    @require_once "../config.php";
+    @require_once "../fonction/class.generate.php";
 
-if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
+    $cursor = new PDO("mysql:host=".dbhost.";dbname=".dbname,dbuser,dbpassword);
 
-    echo json_encode(
-        array(
-            generate_page::generateListPage(),
-        )
-    );
+    $pageType = $_GET['type'];
 
-} else {
+    $request = "SELECT project_slug,project_name,project_owner FROM projet_list WHERE project_state=";
 
-    $pageType = $_GET['type']
+    $arr_response = [];
 
-    ?>
-    
-    <?= generate_page::get_head(baseUrl,"Gestionnaire projets | list projets") ?>
+    if ( $pageType == "now" ) {
 
-                <header id="header">
+        $request .= "0";
 
-                      <?= generate_page::generateHeader("projets-".$pageType)  ?>
+    } else if ( $pageType == "finish" ) {
 
-                </header>
+        $request .= "1";
 
-                <main id="page-content" class="view-list">   
+    } else {
 
-                    <?= generate_page::generateListPage() ?>
+        // DO SOMETHING
 
-                </main>
+    }
 
-                <?= generate_page::get_footer() ?>
+    $selection = $cursor->query($request);
 
-    <?php
+    if ($cursor->errorInfo()[2] == null) {
 
-}
+        while($value = $selection->fetch(PDO::FETCH_ASSOC)) {
+            array_push($arr_response,$value);
+        }
+
+        $selection = true;
+        
+    } else {
+
+        $selection = false;
+
+    }
+
+    if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
+
+        echo json_encode(
+            array(
+                generate_page::generateListPage($arr_response),
+            )
+        );
+
+    } else {
+
+        ?>
+        
+        <?= generate_page::get_head(baseUrl,"Gestionnaire projets | list projets") ?>
+
+                    <header id="header">
+
+                        <?= generate_page::generateHeader("projets-".$pageType)  ?>
+
+                    </header>
+
+                    <main id="page-content" class="view-list">   
+
+                        <?= generate_page::generateListPage($arr_response) ?>
+
+                    </main>
+
+                    <?= generate_page::get_footer() ?>
+
+        <?php
+
+    }

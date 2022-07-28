@@ -294,138 +294,50 @@
 
         }
 
-        public static function generateListPage() {
+        public static function generateListPage($arrProject) {
 
-            return '
-            
-            <section id="FilterBar">
+            $pageList = '<section id="FilterBar">
 
-                <div class="containerItemsLeft">
+                    <div class="containerItemsLeft">
 
-                    <label for="searchProject">
-                        <input type="text" name="searchProject" id="searchProject" placeholder="search by project name">
-                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-
-                </div>
-
-            </section>
-
-            <section id="list-projet">
-
-                <section class="containList">
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 23 réalisées </h4>
-                        <h4> Propriétaire : Clément Prévost </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+                        <label for="searchProject">
+                            <input type="text" name="searchProject" id="searchProject" placeholder="search by project name">
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
 
                     </div>
 
                 </section>
 
-            </section>
+                <section id="list-projet">
 
-            ';
+                <section class="containList">';
 
+            foreach( $arrProject as $projet ) {
+
+                $pageList .= '
+                <div class="projet">
+
+                <h2>'.$projet['project_name'].'</h2>
+                <div class="projectPourcentView">
+                    <div class="pourcentBar"><span style="width: 0%;"></span></div>
+                    <h4>0%</h4>
+                </div>
+
+                <h4> 0 tâches sur 0 réalisées </h4>
+                <h4> Propriétaire : '.$projet['project_owner'].' </h4>
+
+                <a href="?projet='.$projet['project_slug'].'">Voir</a>
+
+                </div>';
+
+            }
+
+            $pageList .= '</section>
+            </section>';
+
+            return $pageList;
+            
         }
 
         public static function generateSearch() {

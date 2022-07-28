@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded' , () => {
     /* DECLARATION BTN */
     const submitProject = document.querySelector('#submitProject');
 
-    /* SCRIPT */
+    /* project add form */
     if ( submitProject != undefined ) {
 
         submitProject.onclick = () => {
@@ -67,6 +67,8 @@ window.addEventListener('DOMContentLoaded' , () => {
 
         }
     }
+
+    
 
 })
 
