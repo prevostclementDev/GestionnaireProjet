@@ -354,7 +354,22 @@
 
         }
 
-        public static function generateProject() {
+        public static function generateProject(object $projet) {
+
+            $delai = "";
+
+            if ($projet->endDate != "") {
+
+                $firstDate = new dateTime(date('Y-m-d'));
+                $secondDate = new dateTime($projet->endDate);
+
+                // VERIFIER SI LA DATE ACTUELLE EST PASSER PAR RAPPORT AU DELAI
+                $diff = $firstDate->diff($secondDate);
+
+                $delai = "<h3>Délai restant : ".$diff->days."j</h3>";
+
+            }
+
 
             return '
             
@@ -362,36 +377,33 @@
 
                 <div class="information-about">
 
-                    <h2>File Manager</h2>
+                    <h2>'.$projet->name.'</h2>
 
                     <div class="dateInfo">
     
-                        <h3>Date début : 01/07/2022</h3>
-                        <h3>Date fin : 30/07/2022</h3>
+                        <h3>Date début : '.$projet->startDate.'</h3>
+                        <h3>Date fin : '.$projet->endDate.'</h3>
     
-                        <h3>Délai restant : 10j</h3>
+                        '.$delai.'
     
                     </div>
     
                     <div class="projectPourcentView">
-                        <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                        <h4>16%</h4>
+                        <div class="pourcentBar"><span style="width: 0%;"></span></div>
+                        <h4>0%</h4>
                     </div>
     
                     <div class="description">
     
                         <p>
     
-                            Quae diligentissime contra Aristonem dicuntur a Chryippo. Qui est in parvis malis. Sed haec in pueris; Qualem igitur hominem natura inchoavit? Si longus, levis dictata sunt. Philosophi autem in suis lectulis plerumque moriuntur. Quorum altera prosunt, nocent altera. Quantum Aristoxeni ingenium consumptum videmus in musicis? 
-                            Quae diligentissime contra Aristonem dicuntur a Chryippo. Qui est in parvis malis. Sed haec in pueris; Qualem igitur hominem natura inchoavit? Si longus, levis dictata sunt. Philosophi autem in suis lectulis plerumque moriuntur. Quorum altera prosunt, nocent altera. Quantum Aristoxeni ingenium consumptum videmus in musicis? 
-                            Quae diligentissime contra Aristonem dicuntur a Chryippo. Qui est in parvis malis. Sed haec in pueris; Qualem igitur hominem natura inchoavit? Si longus, levis dictata sunt. Philosophi autem in suis lectulis plerumque moriuntur. Quorum altera prosunt, nocent altera. Quantum Aristoxeni ingenium consumptum videmus in musicis? 
-                            Quae diligentissime contra Aristonem dicuntur a Chryippo. Qui est in parvis malis. Sed haec in pueris; Qualem igitur hominem natura inchoavit? Si longus, levis dictata sunt. Philosophi autem in suis lectulis plerumque moriuntur. Quorum altera prosunt, nocent altera. Quantum Aristoxeni ingenium consumptum videmus in musicis? 
+                        '.$projet->description.'
     
                         </p>
     
                     </div>
     
-                    <h5>Géré par : <span>Prévost Clément</span></h5>
+                    <h5>Géré par : <span>'.$projet->owner.'</span></h5>
 
                 </div>
 

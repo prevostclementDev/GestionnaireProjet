@@ -1,16 +1,17 @@
 <?php
 
 
-    @require_once "../config.php";
+    @require_once "../fonction/BDDpageTraitement/traitement.projet.php";
     @require_once "../fonction/class.generate.php";
 
-    if ( isset($_GET['slug']) ) {
+    if ( $goTo404 == false ) {
+
         /* IF PAGE LOAD ON AJAX REQUEST RETURN JSON */
         if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
             echo json_encode(
                 array(
-                    generate_page::generateProject(),
+                    generate_page::generateProject($projet),
                 )
             );
 
@@ -18,20 +19,20 @@
         } else {
 
             ?>
-            
+                
             <?= generate_page::get_head(baseUrl,"Gestionnaire projets | projets") ?>
 
                         <header id="header">
 
-                            <?= generate_page::generateHeader("now")  ?>
+                            <?= generate_page::generateHeader("projets-now")  ?>
 
                         </header>
 
                         <main id="page-content" class="projectPage">   
 
                             <?php
-                            
-                                    echo generate_page::generateProject();
+                                
+                                    echo generate_page::generateProject($projet);
 
                             ?>
 
@@ -43,8 +44,6 @@
             <?php
 
         }
-    } else {
-
-        // DO SOMETHING IF PROJECT DO NOT EXIST OR SLUG AS NOT DEFINE
 
     }
+    

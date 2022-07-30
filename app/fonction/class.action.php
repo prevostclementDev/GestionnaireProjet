@@ -33,6 +33,7 @@
             return $slug;
         }
 
+        /* GET OPTION IN TALBE GESTIONNAIRE_ADDONS */
         public static function getOptionValue ( string $name, object $bddCursor ) {
 
             $selection = $bddCursor->exec("SELECT addons_option FROM gestionnaire_addons WHERE addons_name=".$name);
@@ -46,6 +47,34 @@
             }
 
             return $arr_response;
+
+        }
+
+        public static function projet_exist(string $slug, object $bddCursor) {
+
+            $arr_response = [];
+
+            $check = $bddCursor->query("SELECT project_name FROM projet_list WHERE project_slug = '$slug' ;");
+
+            if ($bddCursor->errorInfo()[2] == null) {
+        
+                while($value = $check->fetch(PDO::FETCH_ASSOC)) {
+
+                    array_push($arr_response,$value);
+
+                }
+
+            }
+
+            if ( sizeof($arr_response) == 1 ) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
 
         }
 
