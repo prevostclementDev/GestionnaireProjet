@@ -42,6 +42,9 @@ window.addEventListener('load',function(){
 
             RebootEventLink(pageContent)
 
+            /* IF LINK ADD EVENT ON */
+            projetCall(pageContent);
+
         })
 
     } else {
@@ -52,6 +55,8 @@ window.addEventListener('load',function(){
         RebootEventLink(pageContent)
 
     }
+
+    projetCall(pageContent)
 
     /* #################### */
     /* RETURN BACK OR FRONT */
@@ -78,18 +83,21 @@ window.addEventListener('load',function(){
         
                 pageContent.innerHTML = response[1]
     
+                projetCall(pageContent);
+
             })
 
         } else {
 
             const regex = /projets-([a-zA-Z]+)/g;
+            const regexProjet = /projet\/([a-zA-Z-]+)/g;
 
             if ( event.state.direction == "accueil" ) {
 
                 classPage = "accueil"
                 type = "noneA"
 
-                ajaxCall = classPage + ".php"
+                ajaxCall = classPage
 
                 document.title = "Gestionnaire projets | accueil"
 
@@ -98,21 +106,30 @@ window.addEventListener('load',function(){
                 classPage = "view-list"
                 type = event.state.direction.split('-')[1]
 
-                ajaxCall = "list?type="+type
+                ajaxCall = event.state.direction
 
-                document.title = "Gestionnaire projets | projets"
+                document.title = "Gestionnaire projets | projets " + type
 
             } else if ( event.state.direction == "search") {
 
                 classPage = "searchPage"
                 type = "noneS"
 
-                ajaxCall = "search.php"
+                ajaxCall = "search"
 
                 document.title = "Gestionnaire projets | search"
+
+            } else if ( event.state.direction.search(regexProjet) != -1 ) {
+
+                classPage = "projectPage"
+                type = "now"
+
+                ajaxCall = event.state.direction
+                document.title = "Gestionnaire projets | projet"
+
             }
 
-            requestPage("../app/page/"+ajaxCall, (response) => {
+            requestPage("../app/"+ajaxCall, (response) => {
 
                 pageContent.classList.forEach(elementClass => {
             
@@ -127,6 +144,8 @@ window.addEventListener('load',function(){
                 pageContent.classList.add(classPage);
                 
                 pageContent.innerHTML = response
+
+                projetCall(pageContent);
             
             })
 
@@ -135,9 +154,6 @@ window.addEventListener('load',function(){
     }
 
 })
-
-
-
 
 /* ################## */
 /* AJAX CALL FUNCTION */
@@ -194,19 +210,15 @@ function RebootEventLink(containerContent) {
 
                 linkExplode = newpage.split('-');
 
-                newLink = "list.php?type=" + linkExplode[1]
-
-                document.title = "Gestionnaire projets | "+ linkExplode[0]
+                document.title = "Gestionnaire projets | "+ linkExplode[0] + " " + linkExplode[1]
 
             } else {
-
-                newLink = newpage + ".php"
 
                 document.title = "Gestionnaire projets | "+newpage
 
             }
 
-            requestPage("../app/page/"+newLink, (response) => {
+            requestPage("../app/"+newpage, (response) => {
 
                 containerContent.classList.forEach(elementClass => {
 
@@ -214,13 +226,20 @@ function RebootEventLink(containerContent) {
 
                 })
 
-                document.querySelector("#navigationHeader .Hlink.active").classList.remove("active")
+                active = document.querySelector("#navigationHeader .Hlink.active")
+                if ( active != null ) {
+
+                    active.classList.remove("active")
+
+                }
 
                 el.classList.add('active')
 
                 containerContent.classList.add(el.getAttribute('attr_class'));
                 
                 containerContent.innerHTML = response
+
+                projetCall(containerContent);
 
                 window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
 
@@ -229,5 +248,48 @@ function RebootEventLink(containerContent) {
         })
 
     })
+
+}
+
+/* ######################### */
+/* NAVIGATION TO PROJET PAGE */
+/* ######################### */
+function projetCall(pageContent) {
+
+    const btn_projet = document.querySelectorAll('.projet a');
+    if ( btn_projet.length > 0 ) {
+
+        console.log(btn_projet)
+
+        btn_projet.forEach(link => {
+
+            link.onclick = (e) => {
+
+                e.preventDefault()
+                slug = link.getAttribute('href')
+
+                requestPage('../app/projet/'+slug, (response) => {
+
+                    pageContent.classList.forEach(elementClass => {
+
+                        pageContent.classList.remove(elementClass);
+    
+                    })
+
+                    pageContent.classList.add('projectPage')
+
+                    pageContent.innerHTML = response
+
+                    document.title = "Gestionnaire projets | projet"
+
+                    window.history.pushState({direction : "projet/"+slug}, "projet/"+slug, window.location.origin + baseUrl + "projet/"+slug);
+
+                })
+
+            }
+
+        })
+
+    }
 
 }

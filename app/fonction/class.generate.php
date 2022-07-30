@@ -328,7 +328,7 @@
                 <h4> 0 tâches sur 0 réalisées </h4>
                 <h4> Propriétaire : '.$projet['project_owner'].' </h4>
 
-                <a href="?projet='.$projet['project_slug'].'">Voir</a>
+                <a href="'.$projet['project_slug'].'">Voir</a>
 
                 </div>';
 
@@ -631,6 +631,12 @@
             </div>
 
             ';
+
+        }
+
+        public static function generate404() {
+
+            return '<h1> Erreur 404 : page non trouvée';
 
         }
 

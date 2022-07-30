@@ -17,7 +17,7 @@
 
         ?>
         
-        <?= generate_page::get_head(baseUrl,"Gestionnaire projets | list projets") ?>
+        <?= generate_page::get_head(baseUrl,"Gestionnaire projets | projets ".$pageType) ?>
 
                     <header id="header">
 
