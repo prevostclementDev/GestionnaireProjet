@@ -3,6 +3,7 @@
     @require_once "../config.php";
     @require_once "../fonction/class.generate.php";
 
+    /* IF PAGE LOAD ON AJAX REQUEST RETURN JSON */
     if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']))  {
 
             echo json_encode(
@@ -10,7 +11,7 @@
                     generate_page::generateSearch(),
                 )
             );
-
+    /* ELSE GENERATE PAGE */
     } else {
 
         ?>

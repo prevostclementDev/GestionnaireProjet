@@ -1,8 +1,11 @@
+/* ################################## */
+/*     ACTION : OPEN POP UP etc...    */
+/* ################################## */
 const body = document.querySelector('body');
 
 const bouton_addList = document.querySelector("#add_list_btn");
 const menu_addList = document.querySelector('#ajoutList-menu');
-
+/* ADD LIST TASK POP UP */
 if ( bouton_addList != undefined ) {
 
     bouton_addList.addEventListener('click', function(){
@@ -17,7 +20,7 @@ const containerPopUp = document.querySelector('#containerPopUp');
 const popUp_Projet = document.querySelector('#containerPopUp .add_project_popUp');
 const btn_popUp_Projet = document.querySelector('#add_project')
 const btn_Close_PopUp_projet = document.querySelector('#AddcloseProject');
-
+/* ADD PROJECT POP UP */
 if ( btn_popUp_Projet != undefined ) {
 
     btn_popUp_Projet.addEventListener('click', function(){
@@ -38,6 +41,7 @@ if ( btn_popUp_Projet != undefined ) {
 
 }
 
+/* RETURN OF AJAX INFORMATION FOR PROJECT POP UP */
 function changeReturnValue_project(newValue,type) {
 
     const valueReturn = document.querySelector('#containerPopUp .add_project_popUp #response');
@@ -58,3 +62,57 @@ function changeReturnValue_project(newValue,type) {
 
 }
 
+/* VALIDATION ON FORM POP UP PROJECT */
+function checkValidate(listValue) {
+
+    const regexDate = /(\d{4})-(\d{2})-(\d{2})/g;
+    let returnError = []
+
+    if ( listValue.name.value.length > 255 || listValue.name.value == "" ) {
+
+        returnError.push([listValue.name,"valeur du nom incorrect"])
+
+    }
+
+    if(!listValue.startDate.value.match(regexDate)) {
+
+        returnError.push([listValue.startDate,'date de début non valide'])
+
+    } else {
+
+        if ( listValue.endDate.value != "" && !listValue.endDate.value.match(regexDate) ) {
+
+            returnError.push([listValue.endDate,"date de fin non valide"])
+    
+        } else {
+
+            const start = new Date(listValue.startDate.value)
+            const end = new Date(listValue.endDate.value)
+
+            if ( start.getTime() > end.getTime() ) {
+
+                returnError.push([listValue.endDate,"date de fin avant date de début"])
+
+            }
+
+        }
+
+    }
+
+    if ( listValue.projectOwner.value == "" ) {
+
+        returnError.push([listValue.projectOwner,"propriétaire requis"])
+
+    }
+
+    if ( returnError.length > 0 ) {
+
+        return returnError
+
+    } else {
+
+        return true
+
+    }
+
+}

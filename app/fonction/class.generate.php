@@ -1,5 +1,6 @@
 <?php
 
+    /* class to generate part of app */
     class generate_page {
 
         public static function get_head($base,$title) {

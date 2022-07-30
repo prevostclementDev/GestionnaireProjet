@@ -24,7 +24,8 @@ window.addEventListener('DOMContentLoaded' , () => {
 
             }
             
-            if ( checkValidate(projectValue) == true ) {
+            error = checkValidate(projectValue)
+            if ( error == true ) {
                     
                 ajax_action("../app/fonction/ajax.action.reception.php",projectValue,"addproject", (sendBack) => {
 
@@ -51,7 +52,6 @@ window.addEventListener('DOMContentLoaded' , () => {
 
             } else {
 
-                error = checkValidate(projectValue)
                 messageError = ""
 
                 error.forEach( element => {
@@ -66,67 +66,11 @@ window.addEventListener('DOMContentLoaded' , () => {
             }
 
         }
-    }
-
-    
+    } 
 
 })
 
-/* DURCIR LES REGLES */
-function checkValidate(listValue) {
-
-    const regexDate = /(\d{4})-(\d{2})-(\d{2})/g;
-    let returnError = []
-
-    if ( listValue.name.value.length > 255 || listValue.name.value == "" ) {
-
-        returnError.push([listValue.name,"valeur du nom incorrect"])
-
-    }
-
-    if(!listValue.startDate.value.match(regexDate)) {
-
-        returnError.push([listValue.startDate,'date de début non valide'])
-
-    } else {
-
-        if ( listValue.endDate.value != "" && !listValue.endDate.value.match(regexDate) ) {
-
-            returnError.push([listValue.endDate,"date de fin non valide"])
-    
-        } else {
-
-            const start = new Date(listValue.startDate.value)
-            const end = new Date(listValue.endDate.value)
-
-            if ( start.getTime() > end.getTime() ) {
-
-                returnError.push([listValue.endDate,"date de fin avant date de début"])
-
-            }
-
-        }
-
-    }
-
-    if ( listValue.projectOwner.value == "" ) {
-
-        returnError.push([listValue.projectOwner,"propriétaire requis"])
-
-    }
-
-    if ( returnError.length > 0 ) {
-
-        return returnError
-
-    } else {
-
-        return true
-
-    }
-
-}
-
+/* AJAX CALL FOR ACTION (Add project, dell etc...) */
 function ajax_action(url,postValue,typeAction,callback) {
 
     let xhr = new XMLHttpRequest();

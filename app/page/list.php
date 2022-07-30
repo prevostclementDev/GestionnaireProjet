@@ -3,6 +3,7 @@
     @require_once "../fonction/class.generate.php";
     @require_once "../fonction/BDDpageTraitement/traitement.list.php";
 
+    /* IF PAGE LOAD ON AJAX REQUEST RETURN JSON */
     if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
         echo json_encode(
@@ -11,6 +12,7 @@
             )
         );
 
+    /* ELSE GENERATE PAGE */
     } else {
 
         ?>
