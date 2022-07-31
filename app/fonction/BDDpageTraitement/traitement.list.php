@@ -25,10 +25,23 @@
         $request .= "1";
 
     } else {
-        /* GET ONLY 10 LAST PROJECT ADD */
 
         $option = gestionnaireAction::getOptionValue( "recentlyView" , $cursor );
-        // TRAITEMENT DE L'OPTION A FAIRE
+
+        $in = '';
+
+        foreach( array_unique($option[0]) as $value ) {
+
+            $in .= '"'.$value.'",';
+
+        }
+
+        $request = 'SELECT project_slug,project_name,project_owner 
+                    FROM projet_list 
+                    WHERE project_slug 
+                    IN('.substr($in,0,-1).')
+                    ORDER BY FIELD(project_slug,'.substr($in,0,-1).');
+                    ';
 
     }
 

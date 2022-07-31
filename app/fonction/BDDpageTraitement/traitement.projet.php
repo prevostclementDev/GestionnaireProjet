@@ -5,17 +5,16 @@
     @require_once $_SERVER['DOCUMENT_ROOT']."/__site/__fromscratch/GestionnaireProjet/app/fonction/class.projet.php";
         
     $cursor = new PDO("mysql:host=".dbhost.";dbname=".dbname,dbuser,dbpassword);
-    $goTo404 = true;
 
     if ( isset($_GET["slug"])  && gestionnaireAction::projet_exist($_GET["slug"],$cursor)  ){
 
         $projet = new projet($cursor,$_GET["slug"]);
 
-        if ( $projet->state_object == true ) {
+        $update = gestionnaireAction::update_option( 'recentlyView' , $_GET['slug'] , $cursor , 10 );
 
-            $goTo404 = false;
+    } else {
 
-        }
+        $projet = new projet($cursor);
 
     }
 

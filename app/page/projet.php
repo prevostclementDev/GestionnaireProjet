@@ -4,8 +4,6 @@
     @require_once "../fonction/BDDpageTraitement/traitement.projet.php";
     @require_once "../fonction/class.generate.php";
 
-    if ( $goTo404 == false ) {
-
         /* IF PAGE LOAD ON AJAX REQUEST RETURN JSON */
         if ( isset($_SERVER['HTTP_AJAXREQUESTSERVER']) ) {
 
@@ -44,6 +42,4 @@
             <?php
 
         }
-
-    }
     

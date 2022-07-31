@@ -7,6 +7,10 @@
         public string $name;
         public string $startDate;
         public string $endDate;
+
+        public object $diffDate;
+        public string $htmlDiff;
+        
         public string $categorie;
         public string $description;
         public string $owner;
@@ -89,7 +93,40 @@
             $this->owner = $arr[0]["project_owner"];
             $this->state = $arr[0]["project_state"];
 
+            if ( $this->endDate != "" && $this->state == '0' ) {
+
+                $this->setDiffDate();
+
+            } else if ( $this->state == '1' ) {
+
+                $this->htmlDiff = '<h3 style="color : #D5573B;">PROJET TERMINÉ<h3>';
+
+            } else {
+
+                $this->htmlDiff = "";
+
+            }
+
             return true;
+
+        }
+
+        private function setDiffDate(){
+
+            $firstDate = new dateTime(date('Y-m-d'));
+            $secondDate = new dateTime($this->endDate);
+
+            $this->diffDate = $firstDate->diff($secondDate);
+
+            if ( $firstDate > $secondDate ) {
+
+                $this->htmlDiff = '<h3 style="color : red;">Délai dépassé de : '.$this->diffDate->days.' j</h3>';
+
+            } else {
+
+                $this->htmlDiff = "<h3>Délai restant : ".$this->diffDate->days."j</h3>";
+
+            }
 
         }
 

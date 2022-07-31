@@ -3,18 +3,7 @@
 /* ################################## */
 const body = document.querySelector('body');
 
-const bouton_addList = document.querySelector("#add_list_btn");
-const menu_addList = document.querySelector('#ajoutList-menu');
-/* ADD LIST TASK POP UP */
-if ( bouton_addList != undefined ) {
-
-    bouton_addList.addEventListener('click', function(){
-
-        menu_addList.classList.toggle("active");
-    
-    })
-
-}
+task_list_open();
 
 const containerPopUp = document.querySelector('#containerPopUp');
 const popUp_Projet = document.querySelector('#containerPopUp .add_project_popUp');
@@ -113,6 +102,23 @@ function checkValidate(listValue) {
 
         return true
 
+    }
+
+}
+
+function task_list_open() {
+
+    const bouton_addList = document.querySelector("#add_list_btn");
+    const menu_addList = document.querySelector('#ajoutList-menu');
+    /* ADD LIST TASK POP UP */
+    if ( bouton_addList != undefined ) {
+    
+        bouton_addList.addEventListener('click', function(){
+    
+            menu_addList.classList.toggle("active");
+        
+        })
+    
     }
 
 }

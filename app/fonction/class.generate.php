@@ -356,20 +356,11 @@
 
         public static function generateProject(object $projet) {
 
-            $delai = "";
+            if ( $projet->state_object == false ) {
 
-            if ($projet->endDate != "") {
+                return '<h2>Projet non existant</h2>';
 
-                $firstDate = new dateTime(date('Y-m-d'));
-                $secondDate = new dateTime($projet->endDate);
-
-                // VERIFIER SI LA DATE ACTUELLE EST PASSER PAR RAPPORT AU DELAI
-                $diff = $firstDate->diff($secondDate);
-
-                $delai = "<h3>Délai restant : ".$diff->days."j</h3>";
-
-            }
-
+            } else {
 
             return '
             
@@ -384,7 +375,7 @@
                         <h3>Date début : '.$projet->startDate.'</h3>
                         <h3>Date fin : '.$projet->endDate.'</h3>
     
-                        '.$delai.'
+                        '.$projet->htmlDiff.'
     
                     </div>
     
@@ -643,6 +634,8 @@
             </div>
 
             ';
+
+            }
 
         }
 

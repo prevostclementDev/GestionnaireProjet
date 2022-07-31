@@ -257,9 +257,8 @@ function RebootEventLink(containerContent) {
 function projetCall(pageContent) {
 
     const btn_projet = document.querySelectorAll('.projet a');
-    if ( btn_projet.length > 0 ) {
 
-        console.log(btn_projet)
+    if ( btn_projet.length > 0 ) {
 
         btn_projet.forEach(link => {
 
@@ -279,6 +278,8 @@ function projetCall(pageContent) {
                     pageContent.classList.add('projectPage')
 
                     pageContent.innerHTML = response
+
+                    task_list_open();
 
                     document.title = "Gestionnaire projets | projet"
 

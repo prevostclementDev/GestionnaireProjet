@@ -355,7 +355,7 @@ body {
 
             display: grid;
             grid-template-columns: 1fr;
-            grid-template-rows: 520px 1fr;
+            grid-template-rows: auto 1fr;
             grid-template-areas: "zone1" "zone2";
 
             .topViewProject{
