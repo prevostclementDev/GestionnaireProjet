@@ -1,7 +1,6 @@
 # gestionnaireProjet
 --------------------------------------
-## In developpement - Unusable version
---------------------------------------
-### ajax web app
+## In developpement - Unusable version - ajax web app
+-------------------------------------- 
 
-# test
+### I am open to your advice!
