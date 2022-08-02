@@ -20,6 +20,20 @@
 
             echo json_encode($action);
 
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'finishProject' ) {
+
+            $action = gestionnaireAction::finish_project($cursor, $_POST['delete']);
+            
+            if ($action[0] == true) {
+
+                echo json_encode("true");
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+            
         }
 
     }

@@ -19,6 +19,20 @@
     
         }
 
+        /* finish project */
+        public static function finish_project(object $dbCursor, string $slug) {
+
+            $request = 'UPDATE projet_list SET project_state = "1" WHERE project_slug = "'.$slug.'";';
+
+            $update = $dbCursor->exec($request);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$request);
+            }else {
+                return array(false,$request,$dbCursor->errorInfo());
+            }
+
+        }
+
         /* TO -> AVIABLE LINK */
         public static function slugify($string){
 

@@ -20,9 +20,11 @@
     <body>
 
         <header id="header">
+            <!-- AJAX CONTENT -->
         </header>
 
-        <main id="page-content">   
+        <main id="page-content">
+            <!-- AJAX CONTENT -->
         </main>
 
         <div id="add_project">
@@ -31,6 +33,38 @@
         </div>
 
         <div id="containerPopUp">
+
+            <div id="confirmationBox">
+
+                <div class="centerBox">
+
+                    <h2>êtes-vous sur de vouloir <span> supprimer le projet </span></h2>
+                    <div class="action">
+
+                        <button id='validation'>Valider</button>
+                        <button id='annulation'>Annuler</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="loader">
+
+                <div class="containsAnimation">
+
+                    <div class="round">
+
+                        <span class="bull bull1"></span>
+                        <span class="bull bull2"></span>
+                        <span class="bull bull3"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
 
             <div class="add_project_popUp">
 

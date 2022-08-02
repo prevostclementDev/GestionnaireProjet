@@ -33,6 +33,38 @@
 
                         <div id="containerPopUp">
 
+                            <div id="confirmationBox">
+
+                                <div class="centerBox">
+                
+                                    <h2>êtes-vous sur de vouloir <span> supprimer le projet </span></h2>
+                                    <div class="action">
+                
+                                        <button id="validation">Valider</button>
+                                        <button id="annulation">Annuler</button>
+                
+                                    </div>
+                
+                                </div>
+                
+                            </div>
+
+                            <div class="loader">
+
+                                <div class="containsAnimation">
+                
+                                    <div class="round">
+                
+                                        <span class="bull bull1"></span>
+                                        <span class="bull bull2"></span>
+                                        <span class="bull bull3"></span>
+                
+                                    </div>
+                
+                                </div>
+                
+                            </div>
+
                             <div class="add_project_popUp">
 
                                 <div class="containsProjectAdd">
@@ -146,7 +178,7 @@
                 <div class="containsTitle">
 
                     <h1>Gestionnaire de projet</h1>
-                    <h2>22 Juillet 2022</h2>
+                    <h2>'.date("d/m/Y").'</h2>
 
                 </div>
 
@@ -168,7 +200,7 @@
                 }
 
                 $header .= '
-                <li><a class="Hlink '.$class.'" href="'.$link["href"].'" attr_type="'.$link["type"].'" attr_class="'.$link["class"].'">
+                <li><a class="Hlink '.$class.' '.$link["href"].'" href="'.$link["href"].'" attr_type="'.$link["type"].'" attr_class="'.$link["class"].'">
                 '.$link["icone"].'
                 <span>'.$link["text"].'</span>
                 </a></li>
@@ -184,6 +216,7 @@
 
         public static function generateAccueil() {
             return '
+
                 <div class="list-recentlyView">
 
                 <h2>Dernier(s) projet(s)</h2>
@@ -362,278 +395,293 @@
 
             } else {
 
-            return '
-            
-            <div class="topViewProject">
+                if ( $projet->endDate == "" ) {
 
-                <div class="information-about">
+                    $dateEnd = "";
 
-                    <h2>'.$projet->name.'</h2>
+                } else {
 
+                    $dateEnd = date("d/m/Y",strtotime($projet->endDate));
+
+                }
+
+                $returnContent = '<div class="topViewProject"><div class="information-about"><h2>'.$projet->name.'</h2>
+                
                     <div class="dateInfo">
+        
+                            <h3>Date début : '.date("d/m/Y",strtotime($projet->startDate)).'</h3>
+                            <h3>Date fin : '.$dateEnd.'</h3>
+        
+                            '.$projet->htmlDiff.'
+        
+                        </div>
+        
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: 0%;"></span></div>
+                            <h4>0%</h4>
+                        </div>
+        
+                        <div class="description"><p>'.$projet->description.'</p></div><h5>Géré par : <span>'.$projet->owner.'</span></h5>
+
+                    </div>';
+
+                if ( $projet->state == "1" ) {
+
+                    $returnContent .= '
+                    <div class="actionAbout">
     
-                        <h3>Date début : '.$projet->startDate.'</h3>
-                        <h3>Date fin : '.$projet->endDate.'</h3>
+                        <div class="projectAction">
     
-                        '.$projet->htmlDiff.'
+                            <button attr_slug="'.$projet->slug.'">Supprimez le projet</button>
+    
+                        </div>
     
                     </div>
     
-                    <div class="projectPourcentView">
-                        <div class="pourcentBar"><span style="width: 0%;"></span></div>
-                        <h4>0%</h4>
+                    </div>';
+
+                } else {
+
+                    $returnContent .=  '
+                        <div class="actionAbout">
+        
+                            <div class="projectAction">
+        
+                                <button id="finishProject" attr_slug="'.$projet->slug.'">Finir le projet</button>
+                                <button attr_slug="'.$projet->slug.'">Supprimez le projet</button>
+                                <button attr_slug="'.$projet->slug.'">Modifier les informations du projets</button>
+        
+                            </div>
+        
+                            <div class="taskAction">
+        
+                                <button id="add_list_btn" attr_slug="'.$projet->slug.'">Ajouter une liste de tache</button>
+        
+                            </div>
+        
+                        </div>
+        
+                        <div class="ajoutList" id="ajoutList-menu">
+                            <input type="text" id="add_list" placeholder="nom de la nouvelle liste">
+                            <button id="">ajouter</button>
+                        </div>
+        
+                    </div>';
+
+                }
+
+            return $returnContent .'
+
+                <div class="taskProject">
+
+                    <div class="projectList">
+
+                        <div class="taskList" listName="serverTask">
+
+                            <h2>Titre de la liste</h2>
+        
+                            <div class="firstContainer">
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+        
+                            <div class="addTask">
+                                <button>ajout une tache</button>
+                            </div>
+        
+                        </div>
+
+                        <div class="taskList" listName="serverTask">
+
+                            <h2>Titre de la liste</h2>
+        
+                            <div class="firstContainer">
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+        
+                            <div class="addTask">
+                                <button>ajout une tache</button>
+                            </div>
+        
+                        </div>
+
+                        <div class="taskList" listName="serverTask">
+
+                            <h2>Titre de la liste</h2>
+        
+                            <div class="firstContainer">
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                                <div class="task" listProperty="serverTask">
+                                    <div class="principeInfo">
+                                        <h2>Modification .htaccess</h2>
+                                        <p class="desc">modifier .htaccess pour redirect la preprod</p>
+                                        <p class="assign">Assigner à : Prévost Clément</p>
+                                    </div>
+
+                                    <div class="actionAbout">
+                                        <button>supprimez</button>
+                                        <button>valider</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+        
+                            <div class="addTask">
+                                <button>ajout une tache</button>
+                            </div>
+        
+                        </div>
+
                     </div>
-    
-                    <div class="description">
-    
-                        <p>
-    
-                        '.$projet->description.'
-    
-                        </p>
-    
-                    </div>
-    
-                    <h5>Géré par : <span>'.$projet->owner.'</span></h5>
+
 
                 </div>
-
-                <div class="actionAbout">
-
-                    <div class="projectAction">
-
-                        <button>Finir le projet</button>
-                        <button>Supprimez le projet</button>
-                        <button>Modifier les informations du projets</button>
-
-                    </div>
-
-                    <div class="taskAction">
-
-                        <button id="add_list_btn">Ajouter une liste de tache</button>
-
-                    </div>
-
-                </div>
-
-                <div class="ajoutList" id="ajoutList-menu">
-                    <input type="text" id="add_list" placeholder="nom de la nouvelle liste">
-                    <button id="">ajouter</button>
-                </div>
-
-            </div>
-
-            <div class="taskProject">
-
-                <div class="projectList">
-
-                    <div class="taskList" listName="serverTask">
-
-                        <h2>Titre de la liste</h2>
-    
-                        <div class="firstContainer">
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-    
-                        <div class="addTask">
-                            <button>ajout une tache</button>
-                        </div>
-    
-                    </div>
-
-                    <div class="taskList" listName="serverTask">
-
-                        <h2>Titre de la liste</h2>
-    
-                        <div class="firstContainer">
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-    
-                        <div class="addTask">
-                            <button>ajout une tache</button>
-                        </div>
-    
-                    </div>
-
-                    <div class="taskList" listName="serverTask">
-
-                        <h2>Titre de la liste</h2>
-    
-                        <div class="firstContainer">
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                            <div class="task" listProperty="serverTask">
-                                <div class="principeInfo">
-                                    <h2>Modification .htaccess</h2>
-                                    <p class="desc">modifier .htaccess pour redirect la preprod</p>
-                                    <p class="assign">Assigner à : Prévost Clément</p>
-                                </div>
-
-                                <div class="actionAbout">
-                                    <button>supprimez</button>
-                                    <button>valider</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-    
-                        <div class="addTask">
-                            <button>ajout une tache</button>
-                        </div>
-    
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            ';
+                ';
 
             }
 

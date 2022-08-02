@@ -1,7 +1,9 @@
 <?php
 
     /* SITE URL */
-    define("baseUrl", '<base href="/__site/__fromscratch/GestionnaireProjet/app/">');
+    define("uri", '/__site/__fromscratch/GestionnaireProjet/app/');
+    
+    define("baseUrl", '<base href="'.uri.'">');
 
     /* BDD CONNECTION */
 

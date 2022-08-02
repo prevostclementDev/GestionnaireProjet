@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded' , () => {
 
-    /* DECLARATION BTN */
+    /* DECLARATION BTN ADD PROJECT */
     const submitProject = document.querySelector('#submitProject');
 
     /* project add form */
@@ -68,6 +68,8 @@ window.addEventListener('DOMContentLoaded' , () => {
         }
     } 
 
+    eventFor_finishProject()
+
 })
 
 /* AJAX CALL FOR ACTION (Add project, dell etc...) */
@@ -100,10 +102,127 @@ function ajax_action(url,postValue,typeAction,callback) {
 
     for ( index in postValue ) {
 
-        BODY.append(index,postValue[index].value)
+        if ( typeof postValue[index] === "string" || postValue[index] instanceof String ) {
+
+            BODY.append(index,postValue[index])
+
+        } else {
+
+            BODY.append(index,postValue[index].value)
+
+        }
 
     }
+
     
     xhr.send(BODY);
+
+}
+
+function eventFor_finishProject(){
+
+    const submitFinish = document.querySelector('#finishProject');
+
+    if ( submitFinish != undefined ) {
+
+        submitFinish.onclick = () => {
+
+            PostValue = {
+
+                delete : submitFinish.getAttribute('attr_slug')
+    
+            }
+
+            confirmePopUp(
+                'supprimer le projet',
+                "finishProject",
+                PostValue, 
+                (sendback) => {
+    
+                    if ( sendback == "true" ) {
+    
+                        
+                        changePage("projets-finish",document.querySelector('#page-content'),document.querySelector("#navigationHeader .Hlink.projets-finish"));
+                        setTimeout(() => {
+                            AddreturnIndication("Projet validé avec succès !","valide",document.querySelector('#page-content'));
+                        },350)
+
+                    } else {
+
+                        AddreturnIndication("erreur lors de la finalisation du projet","error",document.querySelector('#page-content'));
+
+                    }
+    
+                    setTimeout(() => {
+                        loader()
+                        AffreturnIndication()
+                    },350)
+                    
+    
+                }
+            )
+    
+        }
+
+    }
+
+}
+
+function confirmePopUp(Msg, TypeEvent,PostValue,action) {
+
+    const containerPopUp = document.querySelector('#containerPopUp');
+    const confirmationBox = document.querySelector('#confirmationBox');
+    const confirmationBoxValide = document.querySelector('#confirmationBox #validation');
+    const confirmationBoxExit = document.querySelector('#confirmationBox #annulation');
+    const confirmationBoxMsg = document.querySelector('#confirmationBox h2 span');
+
+    confirmationBoxMsg.innerHTML = Msg
+
+    containerPopUp.classList.add('active');
+    confirmationBox.classList.add('active');
+
+    confirmationBoxValide.onclick = () => {
+
+        containerPopUp.classList.remove('active');
+        confirmationBox.classList.remove('active');
+        loader()
+
+        ajax_action("../app/fonction/ajax.action.reception.php",PostValue,TypeEvent,action)
+
+    }
+
+    confirmationBoxExit.onclick = () => {
+
+        containerPopUp.classList.remove('active');
+        confirmationBox.classList.remove('active');
+
+    }
+
+
+}
+
+function AddreturnIndication(Msg,type,page) {
+
+    const container = '<div id="returnInfo" class="'+type+'"><p>'+Msg+'</p><div class="close"><i class="fa-solid fa-xmark"></i></div></div>';
+    page.innerHTML = page.innerHTML + container;
+
+    const info = document.querySelector('#returnInfo');
+    const close = document.querySelector('#returnInfo .close');
+
+    close.onclick = () => {
+
+        info.classList.toggle('active');
+
+    }
+
+}
+
+function AffreturnIndication() {
+
+    const info = document.querySelector('#returnInfo');
+    setTimeout(() => {
+        info.classList.toggle('active');
+    },350)
+    
 
 }

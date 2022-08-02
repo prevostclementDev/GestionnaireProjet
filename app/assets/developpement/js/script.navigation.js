@@ -1,4 +1,4 @@
-const baseUrl = "/__site/__fromscratch/GestionnaireProjet/app/"
+const baseUrl = document.querySelector('base').getAttribute('href')
 
 window.addEventListener('load',function(){
 
@@ -65,6 +65,8 @@ window.addEventListener('load',function(){
 
         if (event.state == null) {
 
+            loader();
+
             requestPage("../app/page/accueil.php?getHeader=true", (response) => {
 
                 header.innerHTML = response[0]
@@ -81,6 +83,7 @@ window.addEventListener('load',function(){
         
                 pageContent.classList.add('accueil')
         
+                loader();
                 pageContent.innerHTML = response[1]
     
                 projetCall(pageContent);
@@ -88,6 +91,8 @@ window.addEventListener('load',function(){
             })
 
         } else {
+
+            loader();
 
             const regex = /projets-([a-zA-Z]+)/g;
             const regexProjet = /projet\/([a-zA-Z-]+)/g;
@@ -144,6 +149,7 @@ window.addEventListener('load',function(){
                 pageContent.classList.add(classPage);
                 
                 pageContent.innerHTML = response
+                loader();
 
                 projetCall(pageContent);
             
@@ -205,45 +211,8 @@ function RebootEventLink(containerContent) {
             e.preventDefault()
 
             newpage = el.getAttribute("href")
+            changePage(newpage,containerContent,el)
 
-            if( newpage.includes("-") ) {
-
-                linkExplode = newpage.split('-');
-
-                document.title = "Gestionnaire projets | "+ linkExplode[0] + " " + linkExplode[1]
-
-            } else {
-
-                document.title = "Gestionnaire projets | "+newpage
-
-            }
-
-            requestPage("../app/"+newpage, (response) => {
-
-                containerContent.classList.forEach(elementClass => {
-
-                    containerContent.classList.remove(elementClass);
-
-                })
-
-                active = document.querySelector("#navigationHeader .Hlink.active")
-                if ( active != null ) {
-
-                    active.classList.remove("active")
-
-                }
-
-                el.classList.add('active')
-
-                containerContent.classList.add(el.getAttribute('attr_class'));
-                
-                containerContent.innerHTML = response
-
-                projetCall(containerContent);
-
-                window.history.pushState({direction : newpage}, el.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
-
-            })
 
         })
 
@@ -265,6 +234,10 @@ function projetCall(pageContent) {
             link.onclick = (e) => {
 
                 e.preventDefault()
+
+                loader();
+                window.scrollTo(0,0);
+                
                 slug = link.getAttribute('href')
 
                 requestPage('../app/projet/'+slug, (response) => {
@@ -278,8 +251,10 @@ function projetCall(pageContent) {
                     pageContent.classList.add('projectPage')
 
                     pageContent.innerHTML = response
+                    loader();
 
                     task_list_open();
+                    eventFor_finishProject();
 
                     document.title = "Gestionnaire projets | projet"
 
@@ -292,5 +267,55 @@ function projetCall(pageContent) {
         })
 
     }
+
+}
+
+function changePage(newpage,containerContent,link) {
+
+    window.scrollTo(0,0);
+
+    if( newpage.includes("-") ) {
+
+        linkExplode = newpage.split('-');
+
+        document.title = "Gestionnaire projets | "+ linkExplode[0] + " " + linkExplode[1]
+
+    } else {
+
+        document.title = "Gestionnaire projets | "+newpage
+
+    }
+
+    loader();
+
+    requestPage("../app/"+newpage, (response) => {
+
+        containerContent.classList.forEach(elementClass => {
+
+            containerContent.classList.remove(elementClass);
+
+        })
+
+        active = document.querySelector("#navigationHeader .Hlink.active")
+        if ( active != null ) {
+
+            active.classList.remove("active")
+
+        }
+
+        link.classList.add('active')
+
+        containerContent.classList.add(link.getAttribute('attr_class'));
+        
+        containerContent.innerHTML = response
+        loader();
+
+        projetCall(containerContent);
+
+        window.history.pushState({direction : newpage}, link.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
+
+    })
+
+    return true;
 
 }

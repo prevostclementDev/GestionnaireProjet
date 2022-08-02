@@ -1,9 +1,10 @@
 <?php
     class projet {
 
-        private $slug;
+        
         private object $bdd;
 
+        public $slug;
         public string $name;
         public string $startDate;
         public string $endDate;

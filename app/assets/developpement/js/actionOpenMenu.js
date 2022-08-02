@@ -122,3 +122,13 @@ function task_list_open() {
     }
 
 }
+
+function loader() {
+
+    const containerPopUp = document.querySelector('#containerPopUp');
+    const loader = document.querySelector('#containerPopUp .loader');
+
+    containerPopUp.classList.toggle('active');
+    loader.classList.toggle('active');
+
+}

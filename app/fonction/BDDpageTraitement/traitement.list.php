@@ -1,7 +1,7 @@
 <?php
 
-    @require_once $_SERVER['DOCUMENT_ROOT']."/__site/__fromscratch/GestionnaireProjet/app/config.php";
-    @require_once $_SERVER['DOCUMENT_ROOT']."/__site/__fromscratch/GestionnaireProjet/app/fonction/class.action.php";
+    require_once("../config.php");
+    require_once('../fonction/class.action.php');
 
     /* CREATE BDD INSTANCE */
     $cursor = new PDO("mysql:host=".dbhost.";dbname=".dbname,dbuser,dbpassword);

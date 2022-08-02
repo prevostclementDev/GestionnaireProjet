@@ -697,6 +697,42 @@ body {
 
         }
 
+        #returnInfo {
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: $colorCC;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 20;
+            transition: transform 0.35s ease-in-out;
+            transform: translateY(-100%);
+
+            &.valide {
+
+                background-color: $colorP;
+
+            }
+
+            &.active {
+
+                transform: translateY(0);
+
+            }
+
+            .close {
+
+                cursor: pointer;
+
+            }
+
+        }
+
     }
 
     #containerPopUp {
@@ -874,6 +910,181 @@ body {
 
             }
     
+        }
+
+        .loader {
+
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+
+            display: none; // flex
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+
+                display: flex;
+
+            }
+
+            .containsAnimation {
+
+                background-color: white;
+                border-radius: 5px;
+                width: 35%;
+                height: 35%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .round {
+
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    position: relative;
+                    transform-origin: center;
+                    animation: turnAround 2s infinite ease-in-out;
+
+                    .bull {
+
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 50%;
+                        background-color: $colorP;
+                        position: absolute;
+                        left: 50%;
+                        top: 30%;
+                        transform: translate(-50%,-50%);
+
+
+                        &.bull2 {
+
+                            top: 70%;
+                            left: 30%;
+
+                        }
+
+                        &.bull3 {
+
+                            top: 70%;
+                            left: 70%;
+
+                        }
+
+                    }
+
+                }
+
+                @keyframes turnAround {
+                    
+                    0% {
+
+                        transform: rotate(360deg);
+
+                    }
+
+                    50% {
+
+                        transform: rotate(0deg);
+
+                    }
+
+                    100% {
+
+                        transform: rotate(360deg);
+
+                    } 
+
+                }
+
+            }
+
+        }
+
+        #confirmationBox {
+
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+
+            display: none; // flex
+            justify-content: center;
+            align-items: center;
+
+            &.active {
+
+                display: flex;
+
+            }
+
+            .centerBox {
+
+                background-color: white;
+                padding: 20px 25px;
+                color: $colorP;
+                border-radius: 10px;
+
+                h2 {
+
+                    font-size: 20px;
+
+                    span {
+
+                        font-weight: 700;
+
+                    }
+
+                }
+
+                .action {
+
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    button {
+
+                        padding: 10px;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        margin: 0 10px;
+                        cursor: pointer;
+
+                        color: $colorP;
+
+                        &:hover {
+
+                            color: $colorCC;
+
+                        }
+                    
+                        &#validation {
+
+                            padding: 10px 20px;
+                            background-color: $colorP;
+                            color: white;
+                            transition: 0.25s ease-in-out all;
+
+                            &:hover {
+
+                                background-color: $colorCC;
+                                color: white;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
     
     }

@@ -22,7 +22,7 @@
 
                         <header id="header">
 
-                            <?= generate_page::generateHeader("projets-now")  ?>
+                            <?= generate_page::generateHeader("accueil")  ?>
 
                         </header>
 
