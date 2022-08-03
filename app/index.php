@@ -27,6 +27,8 @@
             <!-- AJAX CONTENT -->
         </main>
 
+        <div id="returnInfo" class="error"><p>non</p><div class="close"><i class="fa-solid fa-xmark"></i></div></div>
+
         <div id="add_project">
             <i class="fa-solid fa-plus"></i>
             <span>Ajouter un projet</span>

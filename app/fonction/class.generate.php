@@ -25,8 +25,9 @@
         public static function get_footer(){
 
             return '
-            
-                            <div id="add_project">
+                        <div id="returnInfo" class="error"><p>non</p><div class="close"><i class="fa-solid fa-xmark"></i></div></div>
+
+                        <div id="add_project">
                             <i class="fa-solid fa-plus"></i>
                             <span>Ajouter un projet</span>
                         </div>
@@ -432,7 +433,7 @@
     
                         <div class="projectAction">
     
-                            <button attr_slug="'.$projet->slug.'">Supprimez le projet</button>
+                            <button attr_slug="'.$projet->slug.'" id="deleteProject">Supprimez le projet</button>
     
                         </div>
     
@@ -448,7 +449,7 @@
                             <div class="projectAction">
         
                                 <button id="finishProject" attr_slug="'.$projet->slug.'">Finir le projet</button>
-                                <button attr_slug="'.$projet->slug.'">Supprimez le projet</button>
+                                <button attr_slug="'.$projet->slug.'" id="deleteProject">Supprimez le projet</button>
                                 <button attr_slug="'.$projet->slug.'">Modifier les informations du projets</button>
         
                             </div>
@@ -463,7 +464,7 @@
         
                         <div class="ajoutList" id="ajoutList-menu">
                             <input type="text" id="add_list" placeholder="nom de la nouvelle liste">
-                            <button id="">ajouter</button>
+                            <button id="addListToProject" attr_slug="'.$projet->slug.'">ajouter</button>
                         </div>
         
                     </div>';

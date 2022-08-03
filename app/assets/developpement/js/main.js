@@ -69,6 +69,8 @@ window.addEventListener('DOMContentLoaded' , () => {
     } 
 
     eventFor_finishProject()
+    eventFor_deleteProject()
+    eventFor_addList()
 
 })
 
@@ -118,56 +120,6 @@ function ajax_action(url,postValue,typeAction,callback) {
     xhr.send(BODY);
 
 }
-
-function eventFor_finishProject(){
-
-    const submitFinish = document.querySelector('#finishProject');
-
-    if ( submitFinish != undefined ) {
-
-        submitFinish.onclick = () => {
-
-            PostValue = {
-
-                delete : submitFinish.getAttribute('attr_slug')
-    
-            }
-
-            confirmePopUp(
-                'supprimer le projet',
-                "finishProject",
-                PostValue, 
-                (sendback) => {
-    
-                    if ( sendback == "true" ) {
-    
-                        
-                        changePage("projets-finish",document.querySelector('#page-content'),document.querySelector("#navigationHeader .Hlink.projets-finish"));
-                        setTimeout(() => {
-                            AddreturnIndication("Projet validé avec succès !","valide",document.querySelector('#page-content'));
-                        },350)
-
-                    } else {
-
-                        AddreturnIndication("erreur lors de la finalisation du projet","error",document.querySelector('#page-content'));
-
-                    }
-    
-                    setTimeout(() => {
-                        loader()
-                        AffreturnIndication()
-                    },350)
-                    
-    
-                }
-            )
-    
-        }
-
-    }
-
-}
-
 function confirmePopUp(Msg, TypeEvent,PostValue,action) {
 
     const containerPopUp = document.querySelector('#containerPopUp');
@@ -201,13 +153,175 @@ function confirmePopUp(Msg, TypeEvent,PostValue,action) {
 
 }
 
-function AddreturnIndication(Msg,type,page) {
 
-    const container = '<div id="returnInfo" class="'+type+'"><p>'+Msg+'</p><div class="close"><i class="fa-solid fa-xmark"></i></div></div>';
-    page.innerHTML = page.innerHTML + container;
+function eventFor_finishProject(){
 
-    const info = document.querySelector('#returnInfo');
-    const close = document.querySelector('#returnInfo .close');
+    const submitFinish = document.querySelector('#finishProject');
+
+    if ( submitFinish != undefined ) {
+
+        submitFinish.onclick = () => {
+
+            PostValue = {
+
+                delete : submitFinish.getAttribute('attr_slug')
+    
+            }
+
+            confirmePopUp(
+                'finir le projet',
+                "finishProject",
+                PostValue, 
+                (sendback) => {
+    
+                    if ( sendback == "true" ) {
+    
+                        
+                        changePage("projets-finish",document.querySelector('#page-content'),document.querySelector("#navigationHeader .Hlink.projets-finish"));
+                        setTimeout(() => {
+                            AddreturnIndication("Projet validé avec succès !","valide");
+                        },350)
+
+                    } else {
+
+                        AddreturnIndication("erreur lors de la finalisation du projet","error");
+
+                    }
+    
+                    setTimeout(() => {
+                        loader()
+                        AffreturnIndication()
+                    },350)
+                    
+    
+                }
+            )
+    
+        }
+
+    }
+
+}
+
+function eventFor_deleteProject() {
+
+    deleteProject = document.querySelector('#deleteProject');
+
+    if ( deleteProject != undefined ) {
+
+        deleteProject.onclick = () => {
+
+            PostValue = {
+
+                delete : deleteProject.getAttribute('attr_slug')
+    
+            }
+
+            confirmePopUp(
+                'supprimer le projet',
+                "deleteProject",
+                PostValue, 
+                (sendback) => {
+    
+                    if ( sendback == "true" ) {
+    
+                        
+                        changePage("projets-now",document.querySelector('#page-content'),document.querySelector("#navigationHeader .Hlink.projets-now"));
+                        setTimeout(() => {
+                            AddreturnIndication("Projet supprimé avec succès !","valide");
+                        },350)
+
+                    } else {
+
+                        AddreturnIndication("erreur lors de la suppression du projet","error");
+
+                    }
+    
+                    setTimeout(() => {
+                        loader()
+                        AffreturnIndication()
+                    },350)
+                    
+    
+                }
+            )
+
+        }
+
+    }
+
+}
+
+function eventFor_addList() {
+
+    addList = document.querySelector('#addListToProject');
+
+    if ( addList != undefined ) {
+
+        addList.onclick = () => {
+
+            document.querySelector('#add_list').style.borderColor = "#16302b"
+
+            if ( document.querySelector('#add_list').value != "" ) {
+
+                loader()
+
+                PostValue = {
+
+                    slug : addList.getAttribute('attr_slug'),
+                    listName : document.querySelector('#add_list').value
+        
+                }
+
+                ajax_action("../app/fonction/ajax.action.reception.php",PostValue,"addList", (sendback) => {
+
+                    if ( sendback == "true" ) {
+
+                        initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                         setTimeout(() => {
+                            AddreturnIndication("Liste ajoutée !","valide");
+                        },350)
+
+                    } else {
+
+                        AddreturnIndication("erreur lors de l'ajout de la liste","error");
+
+                    }
+    
+                    setTimeout(() => {
+                        loader()
+                        AffreturnIndication()
+                    },350)
+
+
+
+                })
+
+            } else {
+
+                document.querySelector('#add_list').style.borderColor = "red"
+
+            }
+
+        }
+
+    }
+
+}
+
+function AddreturnIndication(Msg,type) {
+
+    let info = document.querySelector('#returnInfo');
+    let close = document.querySelector('#returnInfo .close');
+
+    info.classList.forEach(elementClass => {
+
+        info.classList.remove(elementClass);
+
+    })
+
+    info.classList.add(type)
+    document.querySelector('#returnInfo p').innerHTML = Msg
 
     close.onclick = () => {
 

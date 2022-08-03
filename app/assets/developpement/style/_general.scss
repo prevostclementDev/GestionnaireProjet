@@ -697,41 +697,7 @@ body {
 
         }
 
-        #returnInfo {
 
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 20px;
-            background-color: $colorCC;
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 20;
-            transition: transform 0.35s ease-in-out;
-            transform: translateY(-100%);
-
-            &.valide {
-
-                background-color: $colorP;
-
-            }
-
-            &.active {
-
-                transform: translateY(0);
-
-            }
-
-            .close {
-
-                cursor: pointer;
-
-            }
-
-        }
 
     }
 
@@ -1217,6 +1183,42 @@ body {
                 color: white;
 
             }
+
+        }
+
+    }
+
+    #returnInfo {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 20px;
+        background-color: $colorCC;
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 20;
+        transition: transform 0.35s ease-in-out;
+        transform: translateY(-100%);
+
+        &.valide {
+
+            background-color: $colorP;
+
+        }
+
+        &.active {
+
+            transform: translateY(0);
+
+        }
+
+        .close {
+
+            cursor: pointer;
 
         }
 

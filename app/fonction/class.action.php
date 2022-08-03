@@ -33,6 +33,34 @@
 
         }
 
+        /* delete */
+        public static function delete_project(object $dbCursor, string $slug) {
+
+            $request = 'DELETE FROM projet_list WHERE project_slug = "'.$slug.'";';
+
+            $update = $dbCursor->exec($request);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$request);
+            }else {
+                return array(false,$request,$dbCursor->errorInfo());
+            }
+
+            
+        }
+
+        public static function addList(object $dbCursor, string $slug, string $name) {
+
+            $requete = 'INSERT INTO listtask_top (id_project,list_name) VALUES ("'.$slug.'","'.$name.'");';
+
+            $insert = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
         /* TO -> AVIABLE LINK */
         public static function slugify($string){
 

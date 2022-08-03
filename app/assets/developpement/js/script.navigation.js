@@ -235,38 +235,46 @@ function projetCall(pageContent) {
 
                 e.preventDefault()
 
-                loader();
-                window.scrollTo(0,0);
-                
                 slug = link.getAttribute('href')
 
-                requestPage('../app/projet/'+slug, (response) => {
-
-                    pageContent.classList.forEach(elementClass => {
-
-                        pageContent.classList.remove(elementClass);
-    
-                    })
-
-                    pageContent.classList.add('projectPage')
-
-                    pageContent.innerHTML = response
-                    loader();
-
-                    task_list_open();
-                    eventFor_finishProject();
-
-                    document.title = "Gestionnaire projets | projet"
-
-                    window.history.pushState({direction : "projet/"+slug}, "projet/"+slug, window.location.origin + baseUrl + "projet/"+slug);
-
-                })
+                initProjetPage(slug,pageContent)
 
             }
 
         })
 
     }
+
+}
+
+function initProjetPage(slug,pageContent) {
+
+    loader();
+    window.scrollTo(0,0);
+
+    requestPage('../app/projet/'+slug, (response) => {
+
+        pageContent.classList.forEach(elementClass => {
+
+            pageContent.classList.remove(elementClass);
+
+        })
+
+        pageContent.classList.add('projectPage')
+
+        pageContent.innerHTML = response
+        loader();
+
+        task_list_open();
+        eventFor_finishProject();
+        eventFor_deleteProject();
+        eventFor_addList();
+
+        document.title = "Gestionnaire projets | projet"
+
+        window.history.pushState({direction : "projet/"+slug}, "projet/"+slug, window.location.origin + baseUrl + "projet/"+slug);
+
+    })
 
 }
 

@@ -34,6 +34,44 @@
 
             }
             
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'deleteProject' ) {
+
+            $action = gestionnaireAction::delete_project($cursor, $_POST['delete']);
+            
+            if ($action[0] == true) {
+
+                echo json_encode("true");
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'addList' ) {
+
+            $action = gestionnaireAction::addList($cursor,$_POST['slug'],$_POST['listName']);
+
+            if( $action[0] == true ) {
+
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } else {
+
+            echo json_encode('false');
+
         }
 
+    } else {
+
+        echo "Hello ;) what are you doing ?";
+
     }
+
+    
