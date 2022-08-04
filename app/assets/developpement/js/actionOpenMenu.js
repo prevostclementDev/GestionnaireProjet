@@ -4,6 +4,7 @@
 const body = document.querySelector('body');
 
 task_list_open();
+task_add_open()
 
 const containerPopUp = document.querySelector('#containerPopUp');
 const popUp_Projet = document.querySelector('#containerPopUp .add_project_popUp');
@@ -130,5 +131,46 @@ function loader() {
 
     containerPopUp.classList.toggle('active');
     loader.classList.toggle('active');
+
+}
+
+function task_add_open() {
+
+    const btn = document.querySelectorAll('.addTaskIn')
+
+    if ( btn.length != 0 ) {
+
+        const body = document.querySelector('body');
+        const containerPopUp = document.querySelector('#containerPopUp');
+        const containerTask = document.querySelector('.add_taskPopUp')
+        const submitTask = document.querySelector('#submittask');
+
+        btn.forEach(element => {
+            
+            element.onclick = () => {
+
+                submitTask.setAttribute('id_list',element.getAttribute('id_list'))
+                submitTask.setAttribute('project_slug',element.getAttribute('project_slug'))
+
+                body.style.overflow = "hidden"
+                containerPopUp.classList.add('active')
+                containerTask.classList.add('active')
+    
+
+            }
+
+        });
+
+        const closeBtn = document.querySelector('#Addclosetask');
+        closeBtn.onclick = () => {
+
+            containerPopUp.classList.remove('active')
+            containerTask.classList.remove('active')
+
+        }
+
+    }
+
+
 
 }

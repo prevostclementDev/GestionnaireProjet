@@ -71,6 +71,8 @@ window.addEventListener('DOMContentLoaded' , () => {
     eventFor_finishProject()
     eventFor_deleteProject()
     eventFor_addList()
+    eventFor_deleteList()
+    eventFor_addtask()
 
 })
 
@@ -120,6 +122,7 @@ function ajax_action(url,postValue,typeAction,callback) {
     xhr.send(BODY);
 
 }
+
 function confirmePopUp(Msg, TypeEvent,PostValue,action) {
 
     const containerPopUp = document.querySelector('#containerPopUp');
@@ -304,6 +307,59 @@ function eventFor_addList() {
             }
 
         }
+
+    }
+
+}
+
+function eventFor_deleteList(){
+
+    const removeList = document.querySelectorAll('#RemoveList');
+
+    if ( removeList.length != 0 ) {
+
+        removeList.forEach(btnRemove => {
+
+            btnRemove.onclick = () => {
+    
+                PostValue = {
+    
+                    id_list : btnRemove.getAttribute('id_list'),
+                    slug : btnRemove.getAttribute('project_slug')
+        
+                }
+    
+                confirmePopUp(
+                    'supprimer la list',
+                    "deleteList",
+                    PostValue, 
+                    (sendback) => {
+        
+                        if ( sendback == "true" ) {
+        
+                            initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                             setTimeout(() => {
+                                AddreturnIndication("Liste supprimée !","valide");
+                            },350)
+    
+                        } else {
+    
+                            AddreturnIndication("erreur lors de la suppression de la liste","error");
+    
+                        }
+        
+                        setTimeout(() => {
+                            loader()
+                            AffreturnIndication()
+                        },350)
+                        
+        
+                    }
+                )
+        
+            }
+
+        })
 
     }
 

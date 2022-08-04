@@ -61,6 +61,19 @@
 
         }
 
+        public static function removeList(object $dbCursor, string $id_list) {
+
+            $requete = 'DELETE FROM listtask_top WHERE list_id='.$id_list.'; DELETE FROM task_list WHERE id_list='.$id_list.';';
+
+            $del = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
         /* TO -> AVIABLE LINK */
         public static function slugify($string){
 

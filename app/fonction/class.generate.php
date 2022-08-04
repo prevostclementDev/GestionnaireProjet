@@ -120,6 +120,39 @@
                     
                             </div>
 
+                            <div class="add_taskPopUp">
+
+                                <div class="containstaskAdd">
+
+                                    <div id="Addclosetask">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </div>
+                    
+                                    <div id="form-addtask">
+                    
+                                        <label for="taskName">
+                                            <span>Nom de la tâche :</span>
+                                            <input type="text" name="taskName" id="taskName" placeholder="Faire le design :">
+                                        </label>
+                    
+                                        <label for="taskdesc">
+                                            <span>Description :</span>
+                                            <input type="text" name="taskdesc" id="taskdesc" placeholder="completer le design sur figma...">
+                                        </label>
+                                        
+                                        <label for="taskOwner">
+                                            <span>Propriétaire de la tâche</span>
+                                            <input type="text" name="taskOwner" id="taskOwner" placeholder="Maxime beaujardin">
+                                        </label>
+                                        
+                                        <input type="submit" id="submittask" value="Ajouter la tâche">
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                            </div>
+
                         </div>
                         
                         
@@ -517,7 +550,8 @@
 
                         $returnContent.='</div>
                         <div class="addTask">
-                            <button id_list="'.$list['list_id'].'" id="addTaskIn" >Ajout une tache</button>
+                            <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" class="addTaskIn" >Ajout une tache</button>
+                            <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id="RemoveList" >Supprimer la liste</button>
                         </div>
 
                         </div>';

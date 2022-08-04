@@ -717,7 +717,7 @@ body {
 
         }
     
-        .add_project_popUp {
+        .add_project_popUp,.add_taskPopUp {
     
             position: absolute;
             width: 100%;
@@ -736,7 +736,7 @@ body {
 
             }
 
-            .containsProjectAdd {
+            .containsProjectAdd,.containstaskAdd {
 
                 background-color: white;
                 padding: 50px;
@@ -752,7 +752,7 @@ body {
                 ;
                 position: relative;
 
-                #AddcloseProject {
+                #AddcloseProject,#Addclosetask {
 
                     position: absolute;
                     top: 20px;
@@ -778,7 +778,7 @@ body {
 
                 }
 
-                #form-addProject {
+                #form-addProject,#form-addtask {
 
                     label {
                         

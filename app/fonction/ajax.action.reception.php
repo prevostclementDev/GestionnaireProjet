@@ -62,11 +62,21 @@
 
             }
 
-        } else {
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'deleteList' ) {
+            
+            $action = gestionnaireAction::removeList($cursor,$_POST['id_list']);
 
-            echo json_encode('false');
+            if( $action[0] == true ) {
 
-        }
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } 
 
     } else {
 

@@ -266,9 +266,12 @@ function initProjetPage(slug,pageContent) {
         loader();
 
         task_list_open();
+        task_add_open();
         eventFor_finishProject();
         eventFor_deleteProject();
         eventFor_addList();
+        eventFor_deleteList();
+        eventFor_addtask();
 
         document.title = "Gestionnaire projets | projet"
 
