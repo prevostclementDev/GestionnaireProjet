@@ -24,7 +24,7 @@
 
         $request .= "1";
 
-    } else {
+    } else  if ( $pageType == "recently" ) {
 
         $option = gestionnaireAction::getOptionValue( "recentlyView" , $cursor );
 
@@ -42,6 +42,11 @@
                     IN('.substr($in,0,-1).')
                     ORDER BY FIELD(project_slug,'.substr($in,0,-1).');
                     ';
+
+    } else {
+
+        header('Location: page/404.php');
+        exit();
 
     }
 

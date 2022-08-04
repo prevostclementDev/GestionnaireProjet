@@ -14,6 +14,7 @@
 
     } else {
 
-        $projet = new projet($cursor);
+        header('Location: ../page/404.php');
+        exit();
 
     }

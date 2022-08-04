@@ -16,6 +16,7 @@
         public string $description;
         public string $owner;
         public string $state;
+        public array $list_task = [];
 
         public bool $state_object;
 
@@ -108,6 +109,8 @@
 
             }
 
+            $this->getList();
+
             return true;
 
         }
@@ -126,6 +129,52 @@
             } else {
 
                 $this->htmlDiff = "<h3>Délai restant : ".$this->diffDate->days."j</h3>";
+
+            }
+
+        }
+
+        private function getList(){
+
+            $arr_response = [];
+
+            $listTop = $this->bdd->query("SELECT list_id,id_project,list_name
+                                        FROM listtask_top 
+                                        WHERE id_project = '$this->slug';");
+
+            if ($this->bdd->errorInfo()[2] == null) {
+        
+                while($value = $listTop->fetch(PDO::FETCH_ASSOC)) {
+
+                    $arr_response[$value["list_id"]] = $value;
+                    $arr_response[$value["list_id"]]['task'] = array();
+
+                    $task = $this->bdd->query("SELECT task_id,task_name,task_desc,task_state,task_user
+                                                  FROM task_list 
+                                                  WHERE id_list = '".$value["list_id"]."';");
+
+                    if ($this->bdd->errorInfo()[2] == null) {
+
+                        while($valueTask = $task->fetch(PDO::FETCH_ASSOC)) {
+
+                            array_push($arr_response[$value["list_id"]]['task'] , $valueTask);
+
+                        }
+
+                    } else {
+
+                        return false;
+
+                    }
+
+                }
+
+                $this->list_task = $arr_response;
+                return true;
+
+            } else {
+
+                return false;
 
             }
 
