@@ -76,7 +76,63 @@
 
             }
 
-        } 
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'addTask' ) {
+
+            $action = gestionnaireAction::addTask($cursor,$_POST['id_list'],$_POST['taskname'],$_POST['taskdesc'],$_POST['taskowner']);
+
+            if( $action[0] == true ) {
+
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'finishTask' ) {
+
+            $action = gestionnaireAction::finishTask($cursor,$_POST['id_task']);
+
+            if( $action[0] == true ) {
+
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'unfinishTask' ) {
+
+            $action = gestionnaireAction::unfinishTask($cursor,$_POST['id_task']);
+
+            if( $action[0] == true ) {
+
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        } else if ( $_SERVER["HTTP_AJAXACTION"] == 'deleteTask' ) {
+
+            $action = gestionnaireAction::deleteTask($cursor,$_POST['id_task']);
+
+            if( $action[0] == true ) {
+
+                echo json_encode('true');
+
+            } else {
+
+                echo json_encode('false');
+
+            }
+
+        }
 
     } else {
 

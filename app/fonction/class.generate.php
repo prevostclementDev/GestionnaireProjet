@@ -146,6 +146,10 @@
                                         </label>
                                         
                                         <input type="submit" id="submittask" value="Ajouter la tâche">
+
+                                        <div id="responseTask">
+                            
+                                        </div>
                     
                                     </div>
                     
@@ -525,22 +529,32 @@
                         foreach( $list['task'] as $task ) {
 
                             $returnContent.='<div class="task" state="'.$task['task_state'].'" listProperty="serverTask">
-                            <div class="principeInfo">
-                                <h2>'.utf8_encode($task['task_name']).'</h2>
-                                <p class="desc">'.utf8_encode($task['task_desc']).'</p>
+                            <div class="principeInfo">';
+                                
+                            if ( $task['task_state'] == "0" ) {
+
+                                $returnContent.='<h2>'.utf8_encode($task['task_name']).'</h2>';
+
+                            } else {
+
+                                $returnContent.='<h2>'.utf8_encode($task['task_name']).' (Validé) </h2>';
+
+                            }          
+
+                            $returnContent.='<p class="desc">'.utf8_encode($task['task_desc']).'</p>
                                 <p class="assign">Assigner à : '.utf8_encode($task['task_user']).'</p>
                             </div>
 
                             <div class="actionAbout">
-                                <button id_list="'.$list['list_id'].'" id_task="" class="deleteTask">Supprimez</button>';
+                                <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id_task="'.$task['task_id'].'" class="deleteTask">Supprimez</button>';
 
                                 if ( $task['task_state'] == "0" ) {
 
-                                    $returnContent.='<button id_list="'.$list['list_id'].'" id_task="" class="valideTask"> Valider</button>';
+                                    $returnContent.='<button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id_task="'.$task['task_id'].'" class="valideTask"> Valider</button>';
 
                                 } else {
 
-                                    $returnContent.='<button id_list="'.$list['list_id'].'" id_task="" class="unvalideTask"> Invalider</button>';
+                                    $returnContent.='<button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id_task="'.$task['task_id'].'" class="unvalideTask"> Invalider</button>';
 
                                 }
 

@@ -95,6 +95,10 @@
                         
                         <input type="submit" id="submittask" value="Ajouter la tâche">
 
+                        <div id="responseTask">
+                            
+                        </div>
+
                     </div>
 
                 </div>

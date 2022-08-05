@@ -72,7 +72,10 @@ window.addEventListener('DOMContentLoaded' , () => {
     eventFor_deleteProject()
     eventFor_addList()
     eventFor_deleteList()
-    eventFor_addtask()
+    eventFor_addTask();
+    eventFor_valideTask();
+    eventFor_unvalideTask();
+    eventFor_deleteTask();
 
 })
 
@@ -205,7 +208,6 @@ function eventFor_finishProject(){
     }
 
 }
-
 function eventFor_deleteProject() {
 
     deleteProject = document.querySelector('#deleteProject');
@@ -254,7 +256,6 @@ function eventFor_deleteProject() {
     }
 
 }
-
 function eventFor_addList() {
 
     addList = document.querySelector('#addListToProject');
@@ -311,7 +312,6 @@ function eventFor_addList() {
     }
 
 }
-
 function eventFor_deleteList(){
 
     const removeList = document.querySelectorAll('#RemoveList');
@@ -364,6 +364,224 @@ function eventFor_deleteList(){
     }
 
 }
+function eventFor_addTask() {
+
+    addTask = document.querySelector('#submittask');
+
+    if ( addTask != undefined ) {
+
+        addTask.onclick = () => {
+
+            if ( document.querySelector('#taskName').value != "" ) {
+
+                document.querySelector('#containerPopUp').classList.remove('active')
+                document.querySelector('.add_taskPopUp').classList.remove('active')
+                document.querySelector('body').style.overflow = "auto";
+
+                loader()
+
+                PostValue = {
+
+                    slug : addTask.getAttribute('project_slug'),
+                    id_list : addTask.getAttribute('id_list'),
+                    taskname : document.querySelector('#taskName').value,
+                    taskowner : document.querySelector('#taskOwner').value,
+                    taskdesc : document.querySelector('#taskdesc').value,
+        
+                }
+
+                ajax_action("../app/fonction/ajax.action.reception.php",PostValue,"addTask", (sendback) => {
+
+                    if ( sendback == "true" ) {
+
+                        initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                         setTimeout(() => {
+                            AddreturnIndication("Tâche ajoutée !","valide");
+                        },350)
+
+                    } else {
+
+                        AddreturnIndication("erreur lors de l'ajout de la tâche","error");
+                        changeReturnValue_task("erreur lors de l'ajout de la tâche","error");
+
+                    }
+    
+                    setTimeout(() => {
+                        loader()
+                        AffreturnIndication()
+                    },350)
+
+
+                })
+
+            } else {
+
+                changeReturnValue_task("Nom de la tâche obligatoire","error");
+
+            }
+
+        }
+
+    }
+
+}
+function eventFor_valideTask(){
+
+    const removeList = document.querySelectorAll('.valideTask');
+
+    if ( removeList.length != 0 ) {
+
+        removeList.forEach(btnRemove => {
+
+            btnRemove.onclick = () => {
+    
+                PostValue = {
+    
+                    id_task : btnRemove.getAttribute('id_task'),
+                    slug : btnRemove.getAttribute('project_slug')
+        
+                }
+    
+                confirmePopUp(
+                    'valider la tâche',
+                    "finishTask",
+                    PostValue, 
+                    (sendback) => {
+        
+                        if ( sendback == "true" ) {
+        
+                            initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                             setTimeout(() => {
+                                AddreturnIndication("Tâche validée !","valide");
+                            },350)
+    
+                        } else {
+    
+                            AddreturnIndication("erreur lors de la validation de la tâche","error");
+    
+                        }
+        
+                        setTimeout(() => {
+                            loader()
+                            AffreturnIndication()
+                        },350)
+                        
+        
+                    }
+                )
+        
+            }
+
+        })
+
+    }
+
+}
+function eventFor_unvalideTask(){
+
+    const removeList = document.querySelectorAll('.unvalideTask');
+
+    if ( removeList.length != 0 ) {
+
+        removeList.forEach(btnRemove => {
+
+            btnRemove.onclick = () => {
+    
+                PostValue = {
+    
+                    id_task : btnRemove.getAttribute('id_task'),
+                    slug : btnRemove.getAttribute('project_slug')
+        
+                }
+    
+                confirmePopUp(
+                    'invalider la tâche',
+                    "unfinishTask",
+                    PostValue, 
+                    (sendback) => {
+        
+                        if ( sendback == "true" ) {
+        
+                            initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                             setTimeout(() => {
+                                AddreturnIndication("Tâche invalidée !","valide");
+                            },350)
+    
+                        } else {
+    
+                            AddreturnIndication("erreur lors de la invalidation de la tâche","error");
+    
+                        }
+        
+                        setTimeout(() => {
+                            loader()
+                            AffreturnIndication()
+                        },350)
+                        
+        
+                    }
+                )
+        
+            }
+
+        })
+
+    }
+
+}
+function eventFor_deleteTask(){
+
+    const removeList = document.querySelectorAll('.deleteTask');
+
+    if ( removeList.length != 0 ) {
+
+        removeList.forEach(btnRemove => {
+
+            btnRemove.onclick = () => {
+    
+                PostValue = {
+    
+                    id_task : btnRemove.getAttribute('id_task'),
+                    slug : btnRemove.getAttribute('project_slug')
+        
+                }
+    
+                confirmePopUp(
+                    'supprimer la tâche',
+                    "deleteTask",
+                    PostValue, 
+                    (sendback) => {
+        
+                        if ( sendback == "true" ) {
+        
+                            initProjetPage(PostValue.slug,document.querySelector('#page-content'));
+                             setTimeout(() => {
+                                AddreturnIndication("Tâche supprimée !","valide");
+                            },350)
+    
+                        } else {
+    
+                            AddreturnIndication("erreur lors de la supression de la tâche","error");
+    
+                        }
+        
+                        setTimeout(() => {
+                            loader()
+                            AffreturnIndication()
+                        },350)
+                        
+        
+                    }
+                )
+        
+            }
+
+        })
+
+    }
+
+}
+
 
 function AddreturnIndication(Msg,type) {
 
@@ -386,7 +604,6 @@ function AddreturnIndication(Msg,type) {
     }
 
 }
-
 function AffreturnIndication() {
 
     const info = document.querySelector('#returnInfo');
@@ -396,3 +613,4 @@ function AffreturnIndication() {
     
 
 }
+

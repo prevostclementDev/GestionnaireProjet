@@ -3,7 +3,6 @@
     /* ACTION ON BDD */
     class gestionnaireAction {
 
-        /* ADD PROJECT FONCTION */
         public static function add_project(object $dbCursor, string $name, string $startDate, string $endDate,string $categorie,string $description, string $owner) : array {
 
                 $requete = 'INSERT INTO projet_list (project_slug,project_name,project_StartDate,project_EnDate,project_categorie,project_description,project_owner,project_state) 
@@ -19,7 +18,6 @@
     
         }
 
-        /* finish project */
         public static function finish_project(object $dbCursor, string $slug) {
 
             $request = 'UPDATE projet_list SET project_state = "1" WHERE project_slug = "'.$slug.'";';
@@ -33,7 +31,6 @@
 
         }
 
-        /* delete */
         public static function delete_project(object $dbCursor, string $slug) {
 
             $request = 'DELETE FROM projet_list WHERE project_slug = "'.$slug.'";';
@@ -74,7 +71,59 @@
 
         }
 
-        /* TO -> AVIABLE LINK */
+        public static function addTask(object $dbCursor, string $id_list, string $taskname, string $taskdesc, string $taskowner) {
+
+            $requete = 'INSERT INTO task_list (id_list,task_name,task_desc,task_state,task_user) VALUES ("'.$id_list.'","'.$taskname.'","'.$taskdesc.'","0","'.$taskowner.'");';
+
+            $insert = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
+        public static function finishTask(object $dbCursor, string $id_task) {
+
+            $requete = 'UPDATE task_list SET task_state = "1" WHERE task_id = '.$id_task.';';
+
+            $update = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
+        public static function unfinishTask(object $dbCursor, string $id_task) {
+
+            $requete = 'UPDATE task_list SET task_state = "0" WHERE task_id = '.$id_task.';';
+
+            $update = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
+        public static function deleteTask(object $dbCursor, string $id_task) {
+
+            $requete = 'DELETE FROM task_list WHERE task_id = '.$id_task.';';
+
+            $update = $dbCursor->exec($requete);
+            if ($dbCursor->errorInfo()[2] == null) {
+                return array(true,$requete);
+            }else {
+                return array(false,$requete,$dbCursor->errorInfo());
+            }
+
+        }
+
+
         public static function slugify($string){
 
             $slug = trim($string); // space first and last character
@@ -88,7 +137,6 @@
             return $slug;
         }
 
-        /* GET OPTION IN TALBE GESTIONNAIRE_ADDONS */
         public static function getOptionValue ( string $name, object $bddCursor ) {
 
             $selection = $bddCursor->query('SELECT addons_option FROM gestionnaire_addons WHERE addons_name="'.$name.'";');
@@ -187,7 +235,6 @@
 
         }
 
-        /* CHECK IF PROJECT EXIST */
         public static function projet_exist(string $slug, object $bddCursor) : bool {
 
             $arr_response = [];
@@ -215,6 +262,5 @@
             }
 
         }
-
 
     }

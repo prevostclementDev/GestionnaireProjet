@@ -271,7 +271,10 @@ function initProjetPage(slug,pageContent) {
         eventFor_deleteProject();
         eventFor_addList();
         eventFor_deleteList();
-        eventFor_addtask();
+        eventFor_addTask();
+        eventFor_valideTask();
+        eventFor_unvalideTask();
+        eventFor_deleteTask();
 
         document.title = "Gestionnaire projets | projet"
 

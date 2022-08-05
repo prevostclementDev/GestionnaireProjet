@@ -167,10 +167,32 @@ function task_add_open() {
             containerPopUp.classList.remove('active')
             containerTask.classList.remove('active')
 
+            body.style.overflow = "auto";
+
         }
 
     }
 
 
+
+}
+
+function changeReturnValue_task(newValue,type) {
+
+    const valueReturn = document.querySelector('#containerPopUp .add_taskPopUp #responseTask');
+
+    if ( type == "error" ) {
+
+        valueReturn.classList.add('error')
+        valueReturn.classList.remove('valide')
+
+    } else if ( type == "valide" ) {
+
+        valueReturn.classList.remove('error')
+        valueReturn.classList.add('valide')
+
+    }
+
+    valueReturn.innerHTML = newValue;
 
 }
