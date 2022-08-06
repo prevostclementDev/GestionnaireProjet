@@ -17,6 +17,7 @@
         public string $owner;
         public string $state;
         public array $list_task = [];
+        public int $pourcentProgression;
 
         public bool $state_object;
 
@@ -137,6 +138,8 @@
         private function getList(){
 
             $arr_response = [];
+            $valideTask = 0;
+            $unvalideTask = 0;
 
             $listTop = $this->bdd->query("SELECT list_id,id_project,list_name
                                         FROM listtask_top 
@@ -159,6 +162,16 @@
 
                             array_push($arr_response[$value["list_id"]]['task'] , $valueTask);
 
+                            if ( $valueTask['task_state'] == "1" ) {
+
+                                $valideTask += 1;
+
+                            } else {
+
+                                $unvalideTask += 1;
+
+                            }
+
                         }
 
                     } else {
@@ -168,6 +181,18 @@
                     }
 
                 }
+
+                if ( $this->state == "1" ) {
+
+                    $this->pourcentProgression = 100;
+
+                } else {
+
+                    $this->pourcentProgression = round((100*$valideTask)/($valideTask+$unvalideTask));
+
+                }
+
+                
 
                 $this->list_task = $arr_response;
                 return true;

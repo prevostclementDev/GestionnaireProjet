@@ -390,16 +390,27 @@
                 $pageList .= '
                 <div class="projet">
 
-                <h2>'.$projet['project_name'].'</h2>
-                <div class="projectPourcentView">
-                    <div class="pourcentBar"><span style="width: 0%;"></span></div>
-                    <h4>0%</h4>
+                <h2>'.$projet['project_name'].'</h2>';
+
+                if ( $projet['project_state'] == "1" ) {
+
+                    $pageList .= '<div class="projectPourcentView">
+                    <div class="pourcentBar"><span style="width: 100%;"></span></div>
+                    <h4>100%</h4>
+                </div>';
+
+                } else {
+
+                    $pageList .= '<div class="projectPourcentView">
+                    <div class="pourcentBar"><span style="width: '.$projet['taskState']['pourcent'].'%;"></span></div>
+                    <h4>'.$projet['taskState']['pourcent'].'%</h4>
                 </div>
 
-                <h4> 0 tâches sur 0 réalisées </h4>
-                <h4> Propriétaire : '.$projet['project_owner'].' </h4>
+                <h4> '.$projet['taskState']['finish'].' tâches sur '.$projet['taskState']['total'].' réalisées </h4>';
 
-                <a href="'.$projet['project_slug'].'">Voir</a>
+                }
+
+                $pageList .='<h4> Propriétaire : '.$projet['project_owner'].' </h4> <a href="'.$projet['project_slug'].'">Voir</a>
 
                 </div>';
 
@@ -450,22 +461,21 @@
                             <h3>Date début : '.date("d/m/Y",strtotime($projet->startDate)).'</h3>
                             <h3>Date fin : '.$dateEnd.'</h3>
         
-                            '.$projet->htmlDiff.'
-        
-                        </div>
-        
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 0%;"></span></div>
-                            <h4>0%</h4>
-                        </div>
-        
-                        <div class="description"><p>'.$projet->description.'</p></div><h5>Géré par : <span>'.$projet->owner.'</span></h5>
-
-                    </div>';
+                            '.$projet->htmlDiff;
 
                 if ( $projet->state == "1" ) {
 
                     $returnContent .= '
+                    </div>
+        
+                    <div class="projectPourcentView">
+                        <div class="pourcentBar"><span style="width: 100%;"></span></div>
+                        <h4>100%</h4>
+                    </div>
+    
+                    <div class="description"><p>'.$projet->description.'</p></div><h5>Géré par : <span>'.$projet->owner.'</span></h5>
+
+                    </div>
                     <div class="actionAbout">
     
                         <div class="projectAction">
@@ -481,6 +491,16 @@
                 } else {
 
                     $returnContent .=  '
+                        </div>
+            
+                        <div class="projectPourcentView">
+                            <div class="pourcentBar"><span style="width: '.strval($projet->pourcentProgression).'%;"></span></div>
+                            <h4>'.strval($projet->pourcentProgression).'%</h4>
+                        </div>
+        
+                        <div class="description"><p>'.$projet->description.'</p></div><h5>Géré par : <span>'.$projet->owner.'</span></h5>
+
+                        </div>
                         <div class="actionAbout">
         
                             <div class="projectAction">
@@ -533,16 +553,16 @@
                                 
                             if ( $task['task_state'] == "0" ) {
 
-                                $returnContent.='<h2>'.utf8_encode($task['task_name']).'</h2>';
+                                $returnContent.='<h2>'.$task['task_name'].'</h2>';
 
                             } else {
 
-                                $returnContent.='<h2>'.utf8_encode($task['task_name']).' (Validé) </h2>';
+                                $returnContent.='<h2>'.$task['task_name'].' (Validé) </h2>';
 
                             }          
 
-                            $returnContent.='<p class="desc">'.utf8_encode($task['task_desc']).'</p>
-                                <p class="assign">Assigner à : '.utf8_encode($task['task_user']).'</p>
+                            $returnContent.='<p class="desc">'.$task['task_desc'].'</p>
+                                <p class="assign">Assigner à : '.$task['task_user'].'</p>
                             </div>
 
                             <div class="actionAbout">
