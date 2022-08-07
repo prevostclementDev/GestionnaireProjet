@@ -325,6 +325,7 @@ function changePage(newpage,containerContent,link) {
         loader();
 
         projetCall(containerContent);
+        basicSearchOnList();
 
         window.history.pushState({direction : newpage}, link.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
 

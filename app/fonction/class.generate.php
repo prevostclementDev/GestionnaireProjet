@@ -375,7 +375,7 @@
 
                         <label for="searchProject">
                             <input type="text" name="searchProject" id="searchProject" placeholder="search by project name">
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button id="searchProjectByName"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
 
                     </div>
@@ -389,7 +389,7 @@
             foreach( $arrProject as $projet ) {
 
                 $pageList .= '
-                <div class="projet">
+                <div class="projet" attr_nameProject="'.$projet['project_name'].'">
 
                 <h2>'.$projet['project_name'].'</h2>';
 
