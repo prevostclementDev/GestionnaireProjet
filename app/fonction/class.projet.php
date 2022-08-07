@@ -188,7 +188,15 @@
 
                 } else {
 
-                    $this->pourcentProgression = round((100*$valideTask)/($valideTask+$unvalideTask));
+                    if ( $valideTask != 0 && $unvalideTask != 0 ) {
+
+                        $this->pourcentProgression = round((100*$valideTask)/($valideTask+$unvalideTask));
+
+                    } else {
+
+                        $this->pourcentProgression = 0;
+
+                    }  
 
                 }
 

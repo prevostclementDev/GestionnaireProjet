@@ -252,117 +252,118 @@
 
         }
 
-        public static function generateAccueil() {
-            return '
+        public static function generateAccueil($degProject,$degTask,$projectFiveList) {
 
-                <div class="list-recentlyView">
+            $returnContent = '';
 
-                <h2>Dernier(s) projet(s)</h2>
+            $returnContent .= '<div class="list-recentlyView">
 
-                <div class="container-list">
+            <h2>Dernier(s) projet(s)</h2>
 
-                    <div class="projet">
+            <div class="container-list">';
 
-                        <h2>Gestionnaire de tâches</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 16%;"></span></div>
-                            <h4>16%</h4>
-                        </div>
+            if ( empty($projectFiveList) ) {
 
-                        <h4> 6 tâches sur 23 réalisées </h4>
+                $returnContent.='<h3>Pas de projet</h3>';
 
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
+            } else {
+                
+                foreach( $projectFiveList as $projet ) {
 
-                    </div>
+                    $returnContent.='
 
                     <div class="projet">
-
-                        <h2>File Manager</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 60%;"></span></div>
-                            <h4>60%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 10 réalisées </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
+    
+                        <h2>'.$projet['project_name'].'</h2>
+    
+                        <a href="'.$projet['project_slug'].'">Voir</a>
+    
                     </div>
+    
+                    ';
 
-                    <div class="projet">
+                }
 
-                        <h2>Portfolio</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 20%;"></span></div>
-                            <h4>20%</h4>
-                        </div>
+            }
 
-                        <h4> 2 tâches sur 20 réalisées </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Partiel B2 S1</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 30%;"></span></div>
-                            <h4>30%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 19 réalisées </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
-
-                    <div class="projet">
-
-                        <h2>Révision PHP</h2>
-                        <div class="projectPourcentView">
-                            <div class="pourcentBar"><span style="width: 52%;"></span></div>
-                            <h4>52%</h4>
-                        </div>
-
-                        <h4> 6 tâches sur 13 réalisées </h4>
-
-                        <a href="?page=singleProject&projectName=gestionnaire_projet">Voir</a>
-
-                    </div>
+            $returnContent .= '</div>
 
                 </div>
 
+                <div class="firststat stat">
+
+                    <div class="statInfo">
+                        <div id=camenberProjet style="';
+                        
+                        if ( $degProject['Finish'] > 0 && $degProject['UnFinish'] > 0 ) {
+
+                            $returnContent .='background-image: conic-gradient(#16302b '.$degProject['Finish'].'deg, #85b79d70 0 '.$degProject['UnFinish'].'deg);';
+
+                        } else {
+
+                            $returnContent .='background-image: conic-gradient(#16302b 0deg, #85b79d30 0 360deg);';
+
+                        }
+                        
+                        $returnContent .='"></div>
+                        <div class="initule">
+                        
+                            <span class="firstCat">
+                            
+                                Projet(s) non fini(s)
+
+                            </span>
+
+                            <span class="SecondCat">
+                            
+                                Projet(s) fini(s)
+
+                            </span>
+
+                        </div>
+                    </div>
+                
+
                 </div>
 
-                <div class="statistique">
+                <div class="Secondstat stat">
 
-                <ul class="statList">
+                    <div class="statInfo">
+                        <div id=camenberProjet style="';
+                        
+                        if ( $degTask['Finish'] > 0 && $degTask['UnFinish'] > 0 ) {
 
-                    <li>
-                        <div class="round-information">15</div>
-                        <div class="information-about-round">Projet(s) en cours</div>
-                    </li>
+                            $returnContent .='background-image: conic-gradient(#16302b '.$degTask['Finish'].'deg, #85b79d70 0 '.$degTask['UnFinish'].'deg);';
 
-                    <li>
-                        <div class="round-information">9</div>
-                        <div class="information-about-round">Projet(s) fini(s)</div>
-                    </li>
+                        } else {
 
-                    <li>
-                        <div class="round-information">38</div>
-                        <div class="information-about-round">Tâche(s) restante(s)</div>
-                    </li>
+                            $returnContent .='background-image: conic-gradient(#16302b 0deg, #85b79d30 0 360deg);';
 
-                    <li>
-                        <div class="round-information">128</div>
-                        <div class="information-about-round">Tâche(s) fini(s)</div>
-                    </li>
+                        }
 
-                </ul>
+                        
+                        $returnContent .='"></div>
+                        <div class="initule">
+                        
+                        <span class="firstCat">
+                        
+                            Tache(s) non fini(s)
+
+                        </span>
+
+                        <span class="SecondCat">
+                        
+                            Tache(s) fini(s)
+
+                        </span>
+
+                        </div>
+                    </div>
 
                 </div>
             ';
+
+            return $returnContent;
 
         }
 
@@ -486,7 +487,13 @@
     
                     </div>
     
-                    </div>';
+                    </div>
+                    
+                    <div class="taskProject">
+
+                    <div class="projectList">
+
+                    ';
 
                 } else {
 
@@ -565,8 +572,11 @@
                                 <p class="assign">Assigner à : '.$task['task_user'].'</p>
                             </div>
 
-                            <div class="actionAbout">
-                                <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id_task="'.$task['task_id'].'" class="deleteTask">Supprimez</button>';
+                            <div class="actionAbout">';
+
+                            if ( $projet->state == "0" ) {
+
+                                $returnContent.='<button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id_task="'.$task['task_id'].'" class="deleteTask">Supprimez</button>';
 
                                 if ( $task['task_state'] == "0" ) {
 
@@ -578,16 +588,23 @@
 
                                 }
 
+                            }
+
                             $returnContent.='</div></div>';
 
                         }
 
                         $returnContent.='</div>
-                        <div class="addTask">
-                            <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" class="addTaskIn" >Ajout une tache</button>
-                            <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id="RemoveList" >Supprimer la liste</button>
-                        </div>
+                        <div class="addTask">';
 
+                        if ($projet->state == "0") {
+
+                            $returnContent.='<button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" class="addTaskIn" >Ajout une tache</button>
+                            <button project_slug="'.$projet->slug.'" id_list="'.$list['list_id'].'" id="RemoveList" >Supprimer la liste</button>';
+
+                        }
+
+                        $returnContent.='</div>
                         </div>';
 
                     }

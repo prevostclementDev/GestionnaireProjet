@@ -1,6 +1,6 @@
 <?php
 
-    @require_once "../config.php";
+    @require_once "../fonction/BDDpageTraitement/traitement.accueil.php";
     @require_once "../fonction/class.generate.php";
 
     /* IF PAGE LOAD ON AJAX REQUEST RETURN JSON */
@@ -12,7 +12,7 @@
             echo json_encode(
                 array(
                     generate_page::generateHeader(),
-                    generate_page::generateAccueil()
+                    generate_page::generateAccueil($degProject,$degTask,$projectFiveList)
                 )
             );
         /* HEADER EXIST */
@@ -20,7 +20,7 @@
 
             echo json_encode(
                 array(
-                    generate_page::generateAccueil()
+                    generate_page::generateAccueil($degProject,$degTask,$projectFiveList)
                 )
             );
 
@@ -40,7 +40,7 @@
 
                     <main id="page-content" class="accueil">   
                         
-                        <?= generate_page::generateAccueil() ?>
+                        <?= generate_page::generateAccueil($degProject,$degTask,$projectFiveList) ?>
 
                     </main>
 

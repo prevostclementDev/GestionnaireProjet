@@ -143,53 +143,86 @@ body {
 
             }
 
-            .statistique {
+            .stat {
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-                grid-area: zone2;
-
-                .statList {
+                .statInfo {
 
                     display: flex;
-                    flex-wrap: wrap;
-                    margin-top: 50px;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
 
-                    li {
+                    .initule {
 
-                        width: calc(100% / 4);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: column;
-                        margin: 0px 0 25px;
+                        margin-top: 20px;
+                        color: $colorP;
 
-                        .round-information {
+                        .firstCat {
 
-                            color: white;
-                            background-color: $colorP;
-                            width: 75px;
-                            height: 75px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
+                            margin-right: 20px;
+                            position: relative;
 
-                            font-size: 24px;
+                            &::before {
 
-                            margin-bottom: 15px;
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                left: 0;
+                                transform: translate(-150%,-50%);
+                                width: 20px;
+                                height: 20px;
+                                background-color: $colorTo;
+
+                            }
 
                         }
 
-                        .information-about-round {
+                        .SecondCat {
 
-                            color: $colorP;
-                            font-weight: 700;
-                            font-size: 14px;
+                            margin-left: 20px;
+                            position: relative;
+
+                            &::before {
+
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                left: 0;
+                                transform: translate(-150%,-50%);
+                                width: 20px;
+                                height: 20px;
+                                background-color: $colorP;
+
+                            }
 
                         }
 
                     }
 
-                }        
+                }
+
+                #camenberProjet {
+
+                    width: 300px;
+                    height: 300px;
+                    border-radius: 50%;
+
+                }
+
+            }
+            .firststat {
+
+                grid-area: zone2;
+
+            }
+            
+            .Secondstat {
+
+                grid-area: zone3;
 
             }
 

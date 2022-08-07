@@ -80,10 +80,20 @@
 
                 }
 
+                if ( $finishTask != 0 && $unfinishTask != 0 ) {
+
+                    $pourcent = round((100*$finishTask)/($finishTask+$unfinishTask));
+
+                } else {
+
+                    $pourcent = 0;
+
+                }
+
                 $value['taskState'] = array(
                     "finish" => $finishTask,
                     "total" => $unfinishTask+$finishTask,
-                    "pourcent" => round((100*$finishTask)/($finishTask+$unfinishTask))
+                    "pourcent" => $pourcent
                 );
 
                 array_push($arr_response,$value);
@@ -99,3 +109,5 @@
         $selection = false;
 
     }
+
+    $cursor = false;

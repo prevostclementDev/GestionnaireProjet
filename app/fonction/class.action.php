@@ -33,7 +33,9 @@
 
         public static function delete_project(object $dbCursor, string $slug) {
 
-            $request = 'DELETE FROM projet_list WHERE project_slug = "'.$slug.'";';
+            $request = 'DELETE FROM projet_list WHERE project_slug = "'.$slug.'";
+                        DELETE FROM task_list WHERE id_list IN(SELECT list_id FROM listtask_top WHERE id_project = "'.$slug.'");
+                        DELETE FROM listtask_top WHERE id_project = "'.$slug.'";';
 
             $update = $dbCursor->exec($request);
             if ($dbCursor->errorInfo()[2] == null) {

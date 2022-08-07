@@ -140,4 +140,4 @@
 
     }
 
-    
+    $cursor = false;
