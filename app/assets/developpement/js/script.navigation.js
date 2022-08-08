@@ -286,6 +286,8 @@ function initProjetPage(slug,pageContent) {
 
 function changePage(newpage,containerContent,link) {
 
+    loader();
+
     window.scrollTo(0,0);
 
     if( newpage.includes("-") ) {
@@ -299,8 +301,6 @@ function changePage(newpage,containerContent,link) {
         document.title = "Gestionnaire projets | "+newpage
 
     }
-
-    loader();
 
     requestPage("../app/"+newpage, (response) => {
 
@@ -326,6 +326,7 @@ function changePage(newpage,containerContent,link) {
 
         projetCall(containerContent);
         basicSearchOnList();
+        advencedSearch();
 
         window.history.pushState({direction : newpage}, link.getAttribute('attr_class'), window.location.origin + baseUrl + newpage);
 

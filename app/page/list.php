@@ -17,11 +17,11 @@
 
         ?>
         
-        <?= generate_page::get_head(baseUrl,"Gestionnaire projets | projets ".$pageType) ?>
+        <?= generate_page::get_head(baseUrl,"Gestionnaire projets | ".$pageType) ?>
 
                     <header id="header">
 
-                        <?= generate_page::generateHeader("projets-".$pageType)  ?>
+                        <?= generate_page::generateHeader($pageType)  ?>
 
                     </header>
 

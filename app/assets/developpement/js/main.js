@@ -77,6 +77,7 @@ window.addEventListener('DOMContentLoaded' , () => {
     eventFor_unvalideTask();
     eventFor_deleteTask();
     basicSearchOnList();
+    advencedSearch();
 
 })
 
@@ -639,6 +640,52 @@ function basicSearchOnList() {
     
             });
 
+        }
+
+    }
+
+}
+
+function advencedSearch() {
+
+    const btn_advencedSearch = document.querySelector('#advencedSearch');
+
+    if ( btn_advencedSearch != undefined ) {
+
+        btn_advencedSearch.onclick = () => {
+
+            const searchInputValue = document.querySelector('#searchProject').value;
+            const containerContent = document.querySelector('#page-content');
+
+            loader();
+
+            window.scrollTo(0,0);
+
+
+            document.title = "Gestionnaire projets | search"
+
+
+            requestPage("../app/search-"+searchInputValue, (response) => {
+
+                containerContent.classList.forEach(elementClass => {
+
+                    containerContent.classList.remove(elementClass);
+
+                })
+
+                containerContent.classList.add('view-list');
+                
+                containerContent.innerHTML = response
+
+                projetCall(containerContent);
+                basicSearchOnList();
+                advencedSearch();
+
+                window.history.pushState({direction : 'search'}, 'search', window.location.origin + baseUrl + 'search');
+
+                loader();
+
+            })
         }
 
     }

@@ -9,5 +9,5 @@
 
     define('dbhost',"localhost");
     define('dbname','gestionnaireprojet');
-    define('dbuser','root');
-    define('dbpassword','');
+    define('dbuser','devClem');
+    define('dbpassword','inyu20bu');

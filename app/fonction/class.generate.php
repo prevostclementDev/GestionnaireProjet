@@ -430,7 +430,7 @@
             <div id="searchProjectPage">
                 <label for="searchProject">
                     <input type="text" name="searchProject" id="searchProject" placeholder="search by project name">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="advencedSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </label>
             </div>
             ';
@@ -514,7 +514,7 @@
         
                                 <button id="finishProject" attr_slug="'.$projet->slug.'">Finir le projet</button>
                                 <button attr_slug="'.$projet->slug.'" id="deleteProject">Supprimez le projet</button>
-                                <button attr_slug="'.$projet->slug.'">Modifier les informations du projets</button>
+                                <!-- <button attr_slug="'.$projet->slug.'">Modifier les informations du projets</button>  -->
         
                             </div>
         

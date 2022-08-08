@@ -1,7 +1,6 @@
 <?php
     class projet {
 
-        
         private object $bdd;
 
         public $slug;

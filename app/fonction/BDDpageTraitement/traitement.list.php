@@ -43,6 +43,12 @@
                     ORDER BY FIELD(project_slug,'.substr($in,0,-1).');
                     ';
 
+    } else if ( $pageType == "search" ) {
+
+        $request = 'SELECT project_slug,project_name,project_owner,project_state
+                    FROM projet_list
+                    WHERE project_name LIKE "%'.$_GET['searchWord'].'%"';
+
     } else {
 
         header('Location: page/404.php');
@@ -110,4 +116,15 @@
 
     }
 
+    if ( isset($_GET['searchWord']) ) {
+
+        $pageType = "search";
+
+    } else {
+
+        $pageType = 'projets-'.$pageType;
+
+    }
+
+    
     $cursor = false;
