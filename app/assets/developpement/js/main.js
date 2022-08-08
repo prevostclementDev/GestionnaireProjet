@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded' , () => {
             error = checkValidate(projectValue)
             if ( error == true ) {
                     
-                ajax_action("../app/fonction/ajax.action.reception.php",projectValue,"addproject", (sendBack) => {
+                ajax_action("fonction/ajax.action.reception.php",projectValue,"addproject", (sendBack) => {
 
                     if ( sendBack[0] ) {
 
@@ -147,7 +147,7 @@ function confirmePopUp(Msg, TypeEvent,PostValue,action) {
         confirmationBox.classList.remove('active');
         loader()
 
-        ajax_action("../app/fonction/ajax.action.reception.php",PostValue,TypeEvent,action)
+        ajax_action("fonction/ajax.action.reception.php",PostValue,TypeEvent,action)
 
     }
 
@@ -279,7 +279,7 @@ function eventFor_addList() {
         
                 }
 
-                ajax_action("../app/fonction/ajax.action.reception.php",PostValue,"addList", (sendback) => {
+                ajax_action("fonction/ajax.action.reception.php",PostValue,"addList", (sendback) => {
 
                     if ( sendback == "true" ) {
 
@@ -392,7 +392,7 @@ function eventFor_addTask() {
         
                 }
 
-                ajax_action("../app/fonction/ajax.action.reception.php",PostValue,"addTask", (sendback) => {
+                ajax_action("fonction/ajax.action.reception.php",PostValue,"addTask", (sendback) => {
 
                     if ( sendback == "true" ) {
 
@@ -645,7 +645,6 @@ function basicSearchOnList() {
     }
 
 }
-
 function advencedSearch() {
 
     const btn_advencedSearch = document.querySelector('#advencedSearch');
@@ -665,7 +664,7 @@ function advencedSearch() {
             document.title = "Gestionnaire projets | search"
 
 
-            requestPage("../app/search-"+searchInputValue, (response) => {
+            requestPage("search-"+searchInputValue, (response) => {
 
                 containerContent.classList.forEach(elementClass => {
 
