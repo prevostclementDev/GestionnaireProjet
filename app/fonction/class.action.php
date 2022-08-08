@@ -169,7 +169,7 @@
 
                 if ( $option == "" ) {
 
-                    $option = serialize($value);
+                    $option = array($value);
 
                 } else {
 
@@ -201,7 +201,6 @@
             if ($bddCursor->errorInfo()[2] == null) {
                 return true;
             } else {
-                var_dump($bddCursor->errorInfo());
                 return false;
             }
 
