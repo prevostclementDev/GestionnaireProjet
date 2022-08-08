@@ -1,6 +1,9 @@
-# gestionnaireProjet
+# Project manager
 --------------------------------------
-## In developpement - Unusable version - ajax web app
+## Ajax web app
 -------------------------------------- 
 
-### I am open to your advice!
+### To use the first version follow this link :
+`https://github.com/prevostclementDev/gestionnaireProjet/releases/tag/V1`
+
+> By Prévost Clément
