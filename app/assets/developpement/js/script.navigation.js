@@ -24,7 +24,7 @@ window.addEventListener('load',function(){
         /* ######### */
         /* AJAX CALL */
         /* ######### */
-        requestPage("../app/page/accueil.php?getHeader=true", (response) => {
+        requestPage("page/accueil.php?getHeader=true", (response) => {
 
             header.innerHTML = response[0]
     
@@ -67,7 +67,7 @@ window.addEventListener('load',function(){
 
             loader();
 
-            requestPage("../app/page/accueil.php?getHeader=true", (response) => {
+            requestPage("page/accueil.php?getHeader=true", (response) => {
 
                 header.innerHTML = response[0]
         
@@ -134,7 +134,7 @@ window.addEventListener('load',function(){
 
             }
 
-            requestPage("../app/"+ajaxCall, (response) => {
+            requestPage(ajaxCall, (response) => {
 
                 pageContent.classList.forEach(elementClass => {
             
@@ -252,7 +252,7 @@ function initProjetPage(slug,pageContent) {
     loader();
     window.scrollTo(0,0);
 
-    requestPage('../app/projet/'+slug, (response) => {
+    requestPage('projet/'+slug, (response) => {
 
         pageContent.classList.forEach(elementClass => {
 
@@ -302,7 +302,7 @@ function changePage(newpage,containerContent,link) {
 
     }
 
-    requestPage("../app/"+newpage, (response) => {
+    requestPage(newpage, (response) => {
 
         containerContent.classList.forEach(elementClass => {
 
