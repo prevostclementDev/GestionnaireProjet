@@ -1,8 +1,0 @@
-RewriteEngine On
-
-RewriteRule ^([a-zA-Z]+)$ page/$1.php [L]
-RewriteRule ^projets-([a-zA-Z]+)$ page/list?type=$1 [L]
-
-RewriteRule ^projet\/([a-zA-Z-]+)$ page/projet.php?slug=$1 [L]
-
-RewriteRule ^search-([a-zA-Z0-9-]+)$ page/list.php?type=search&searchWord=$1 [L]
