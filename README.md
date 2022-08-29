@@ -4,6 +4,6 @@
 -------------------------------------- 
 
 ### To use the first version follow this link :
-`https://github.com/prevostclementDev/gestionnaireProjet/releases/tag/V1`
+`https://github.com/prevostclementDev/gestionnaireProjet/releases/tag/V1.1`
 
 > By Prévost Clément
